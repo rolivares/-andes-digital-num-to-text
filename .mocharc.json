@@ -10,5 +10,7 @@
     "timeout": 2000,
     "recursive": true,
     "spec": [ "test/**/*.spec.ts" ],
-    "require": [ "ts-node/register", "source-map-support/register", "tsconfig-paths/register", "reflect-metadata/Reflect" ]
+    "require": [ "ts-node/register", "source-map-support/register", "tsconfig-paths/register", "reflect-metadata/Reflect" ],
+    "watch": true,
+    "watch-files":[ "src/**", "test/**"]
 }
