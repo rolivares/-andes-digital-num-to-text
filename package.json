@@ -1,0 +1,75 @@
+{
+  "name": "@rolivares/num-to-text-es-js",
+  "version": "0.0.1",
+  "description": "Translate numbers to spanish",
+  "main": "./dist/index.ts",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "Rodrigo Olivares <olivares.rodrigo@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "mkdirp ./reports && mocha --reporter mocha-multi-reporters",
+    "test:watch": "mkdirp ./reports && mocha --watch src,test --reporter mocha-multi-reporters",
+    "test:coverage": "nyc mocha --config .mocharc.json",
+    "test:coverage:dark": "npm run test:coverage && cp ./node_modules/nyc-dark/*.css reports/coverage/",
+    "test:sonar": "sonar-scanner -D sonar.projectKey=${npm_package_name} -D sonar.projectVersion=${npm_package_version}",
+    "update": "updates --update --minor && npm install",
+    "clean": "rimraf ./dist",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint src test",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "prettier src test --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "npm run prettier:fix && npm run lint:fix",
+    "prepack": "npm run build"
+  },
+  "_moduleAliases": {
+    "@headers": "./dist/headers",
+    "@validator": "./dist/validator"
+  },
+  "devDependencies": {
+    "@types/app-root-path": "^1.2.4",
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^17.0.31",
+    "@types/rimraf": "^3.0.2",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "app-root-path": "^3.0.0",
+    "chai": "^4.3.6",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-anti-trojan-source": "^1.1.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-json": "^2.1.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-security": "^1.5.0",
+    "husky": "^4.3.8",
+    "mkdirp": "^1.0.4",
+    "mocha": "^8.4.0",
+    "mocha-junit-reporter": "^2.0.2",
+    "mocha-multi-reporters": "^1.5.1",
+    "module-alias": "^2.2.2",
+    "nyc": "^15.1.0",
+    "nyc-dark": "^3.0.3",
+    "prettier": "^2.6.2",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.7.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.6.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+docker/
+template/
+k8s/
+logs/
+reports/
