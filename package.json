@@ -1,6 +1,6 @@
 {
   "name": "numero-a-texto",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Translate numbers to spanish",
   "keywords": [
     "spanish",
@@ -41,10 +41,6 @@
     "format": "npm run prettier:fix && npm run lint:fix",
     "prepack": "npm run build",
     "prepare": "husky install"
-  },
-  "_moduleAliases": {
-    "@headers": "./dist/headers",
-    "@validator": "./dist/validator"
   },
   "devDependencies": {
     "@types/app-root-path": "^1.2.4",
