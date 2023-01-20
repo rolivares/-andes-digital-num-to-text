@@ -168,7 +168,6 @@ describe("converter.translateConverter", () => {
     expect(converter.translate(935978)).equal('Novecientos treinta y cinco mil novecientos setenta y ocho');
     expect(converter.translate(31511003)).equal('Treinta y un millones quinientos once mil tres');
 
-    // TODO: error ortográfico
     expect(converter.translate(1236721, { suffix: { plural: 'pesos', singular: 'peso' } }))
       .equal('Un millón doscientos treinta y seis mil setecientos veintiún pesos');
     expect(converter.translate(423, { suffix: { plural: 'pesos', singular: 'peso' } }))

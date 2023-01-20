@@ -9,7 +9,7 @@ export default class NumToTextConverter {
   constructor(private transforms: ICaseTransform[]) { }
 
   translate(num: number, options?: INumToTextOptions): string {
-    const opts = this.getOptions(options)
+    const opts = this.ensureOptions(options)
     const casing = this.getCasing(opts)
     const mmForm = !!options?.suffix
     const arr: string[] = []
@@ -38,7 +38,8 @@ export default class NumToTextConverter {
           break;
       }
     })
-    const ret = `${arr.reverse().join(' ')} ${this.getSuffix(num, opts)}`.trim()
+    arr.reverse()
+    const ret = `${arr.join(' ')} ${this.getSuffix(num, opts)}`.trim()
     return casing.transform(ret)
   }
 
@@ -49,7 +50,7 @@ export default class NumToTextConverter {
     return ''
   }
 
-  private getOptions(options?: INumToTextOptions): INumToTextOptions {
+  private ensureOptions(options?: INumToTextOptions): INumToTextOptions {
     return { gender: 'M', case: 'TITLE_CASE', ...(options || {}) };
   }
 
