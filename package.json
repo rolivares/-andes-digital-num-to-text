@@ -1,6 +1,6 @@
 {
   "name": "numero-a-texto",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Translate numbers to spanish",
   "publishConfig": {
     "access": "public"
