@@ -36,5 +36,5 @@ numToText.translate(154821, { suffix: 'pesos'})
 
 numToText.translate(154821, { suffix:'personas', gender: 'F' })
 # Cardinal using female gender
-# 'Ciento cincuenta y cuatro mil ochocientos veintiuna personas'
+# 'Ciento cincuenta y cuatro mil ochocientas veintiuna personas'
 ```
