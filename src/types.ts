@@ -1,8 +1,18 @@
-export type Gender = 'F' | 'M'
+export type NumToTextGenderStyle = 'F' | 'M'
+export const NumToTextGenderStyle = {
+  FEMININE: 'F' as NumToTextGenderStyle,
+  MASCULINE: 'M' as NumToTextGenderStyle
+}
+
 export type NumToTextCasing = 'UPPER_CASE' | 'LOWER_CASE' | 'TITLE_CASE'
+export const NumToTextCasing = {
+  UPPER_CASE: 'UPPER_CASE' as NumToTextCasing,
+  LOWER_CASE: 'LOWER_CASE' as NumToTextCasing,
+  TITLE_CASE: 'TITLE_CASE' as NumToTextCasing
+}
 
 export interface INumToTextOptions {
-  gender?: Gender,
+  gender?: NumToTextGenderStyle,
   case?: NumToTextCasing,
   suffix?: {
     plural: string

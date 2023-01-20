@@ -1,6 +1,6 @@
 import { ICaseTransform } from './transforms/case-transform'
 import TRANSLATION_TEXTS from './translation-texts'
-import { Gender, INumToTextOptions } from './types'
+import { INumToTextOptions, NumToTextCasing, NumToTextGenderStyle } from './types'
 
 export default class NumToTextConverter {
 
@@ -31,8 +31,8 @@ export default class NumToTextConverter {
           }
           break
         case 2:
-          arr.push(this.directTranslate(1000 ** index, singular, 'M'))
-          arr.push(this.reduceTranslation(part, true,  'M'))
+          arr.push(this.directTranslate(1000 ** index, singular, NumToTextGenderStyle.MASCULINE))
+          arr.push(this.reduceTranslation(part, true, NumToTextGenderStyle.MASCULINE))
           break
         default:
           break
@@ -51,7 +51,7 @@ export default class NumToTextConverter {
   }
 
   private ensureOptions(options?: INumToTextOptions): INumToTextOptions {
-    return { gender: 'M', case: 'TITLE_CASE', ...(options || {}) }
+    return { gender: NumToTextGenderStyle.MASCULINE, case: NumToTextCasing.TITLE_CASE, ...(options || {}) }
   }
 
   private getCasing(options: INumToTextOptions) {
@@ -64,7 +64,7 @@ export default class NumToTextConverter {
     return num.toLocaleString('es-cl', { maximumFractionDigits: 0 }).split('.').map(chunk => parseInt(chunk, 10))
   }
 
-  private reduceTranslation(num: number, mmForm: boolean, gender: Gender): string {
+  private reduceTranslation(num: number, mmForm: boolean, gender: NumToTextGenderStyle): string {
     if (num >= 0 && num < 30) {
       return this.directTranslate(num, mmForm, gender)
     }
@@ -89,10 +89,10 @@ export default class NumToTextConverter {
     return this.getNoTranslate(num)
   }
 
-  private directTranslate(num: number, mmForm: boolean, gender: Gender): string {
+  private directTranslate(num: number, mmForm: boolean, genderStyle: NumToTextGenderStyle): string {
     const text = this.texts.find(t => t.num === num)
     if (!text) return this.getNoTranslate(num)
-    if (gender === 'M') {
+    if (genderStyle === NumToTextGenderStyle.MASCULINE) {
       return (mmForm ? (text.mm || text.txt) : text.txt)
     }
     return (text.fem || text.txt)

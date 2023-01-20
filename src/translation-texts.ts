@@ -1,5 +1,10 @@
 import { ITranslationText } from './types'
 
+export const HUNDRED = 100
+export const THOUSAND = 1000
+export const MILLION = 1000000
+export const BILLION = MILLION * MILLION
+
 const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 0, txt: 'cero' },
   { num: 1, txt: 'uno', mm: 'un', fem: 'una' },
@@ -40,7 +45,7 @@ const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 80, txt: 'ochenta' },
   { num: 90, txt: 'noventa' },
 
-  { num: 100, txt: 'cien' },
+  { num: HUNDRED, txt: 'cien' },
   { num: 200, txt: 'doscientos', fem: 'doscientas' },
   { num: 300, txt: 'trescientos', fem: 'trescientas' },
   { num: 400, txt: 'cuatrocientos', fem: 'cuatrocientas' },
@@ -50,9 +55,9 @@ const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 800, txt: 'ochocientos', fem: 'ochocientas' },
   { num: 900, txt: 'novecientos', fem: 'novecientas' },
 
-  { num: 1000, txt: 'mil', mm: 'mil' },
-  { num: 1000000, txt: 'millones', mm: 'millón' },
-  { num: 1000000 * 1000000, txt: 'billones', mm: 'billón' }
+  { num: THOUSAND, txt: 'mil', mm: 'mil' },
+  { num: MILLION, txt: 'millones', mm: 'millón' },
+  { num: BILLION, txt: 'billones', mm: 'billón' }
 
 ]
 

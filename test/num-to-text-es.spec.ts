@@ -5,6 +5,7 @@ import { ICaseTransform } from 'src/transforms/case-transform'
 import LowerCaseTransform from 'src/transforms/lower-case-transform'
 import TitleCaseTransform from 'src/transforms/title-case-transform'
 import UpperCaseTransform from 'src/transforms/upper-case-transform'
+import { NumToTextGenderStyle } from 'src/types'
 
 describe('converter.translateConverter', () => {
   const transforms: ICaseTransform[] = [
@@ -28,8 +29,8 @@ describe('converter.translateConverter', () => {
   })
 
   it('Simple numbers fem', () => {
-    expect(converter.translate(1, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Una pera')
-    expect(converter.translate(2, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Dos peras')
+    expect(converter.translate(1, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Una pera')
+    expect(converter.translate(2, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Dos peras')
   })
 
   it('Numbers 11 => 29 ', () => {
@@ -77,12 +78,12 @@ describe('converter.translateConverter', () => {
   })
 
   it('Numbers 11 => 29 con sufijo femenino', () => {
-    expect(converter.translate(13, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Trece peras')
-    expect(converter.translate(14, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Catorce peras')
-    expect(converter.translate(15, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Quince peras')
-    expect(converter.translate(16, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Dieciséis peras')
-    expect(converter.translate(20, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Veinte peras')
-    expect(converter.translate(21, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Veintiuna peras')
+    expect(converter.translate(13, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Trece peras')
+    expect(converter.translate(14, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Catorce peras')
+    expect(converter.translate(15, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Quince peras')
+    expect(converter.translate(16, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Dieciséis peras')
+    expect(converter.translate(20, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Veinte peras')
+    expect(converter.translate(21, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Veintiuna peras')
   })
 
 
@@ -183,9 +184,9 @@ describe('converter.translateConverter', () => {
     expect(converter.translate(154821)).equal('Ciento cincuenta y cuatro mil ochocientos veintiuno')
     expect(converter.translate(154821, { suffix: { plural: 'pesos', singular: 'peso' } }))
       .equal('Ciento cincuenta y cuatro mil ochocientos veintiún pesos')
-    expect(converter.translate(154821, { suffix: { plural: 'personas', singular: 'persona' }, gender: 'F' }))
+    expect(converter.translate(154821, { suffix: { plural: 'personas', singular: 'persona' }, gender: NumToTextGenderStyle.FEMININE }))
       .equal('Ciento cincuenta y cuatro mil ochocientas veintiuna personas')
-    expect(converter.translate(181154821, { suffix: { plural: 'personas', singular: 'persona' }, gender: 'F' }))
+    expect(converter.translate(181154821, { suffix: { plural: 'personas', singular: 'persona' }, gender: NumToTextGenderStyle.FEMININE }))
       .equal('Ciento ochenta y un millones ciento cincuenta y cuatro mil ochocientas veintiuna personas')
     expect(converter.translate(181154821, { suffix: { plural: 'pesos', singular: 'peso' }, gender: 'M' }))
       .equal('Ciento ochenta y un millones ciento cincuenta y cuatro mil ochocientos veintiún pesos')
