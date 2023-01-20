@@ -5,6 +5,7 @@ import { ICaseTransform } from 'src/transforms/case-transform'
 import LowerCaseTransform from 'src/transforms/lower-case-transform'
 import TitleCaseTransform from 'src/transforms/title-case-transform'
 import UpperCaseTransform from 'src/transforms/upper-case-transform'
+import { BILLION } from 'src/translation-texts'
 import { NumToTextCaseStyle, NumToTextGenderStyle } from 'src/types'
 
 describe('converter.translateConverter', () => {
@@ -14,6 +15,14 @@ describe('converter.translateConverter', () => {
     new TitleCaseTransform()
   ]
   const converter = new NumToTextConverter(transforms)
+
+  it('Accepted range', () => {
+    expect(() => converter.translate(BILLION)).throws()
+  })
+
+  it('Defaults', () => {
+    expect(converter.translate(33, { case: ('OTRO' as NumToTextCaseStyle) })).equal('Treinta y tres')
+  })
 
   it('Simple numbers', () => {
     expect(converter.translate(1)).equal('Uno')
@@ -55,7 +64,7 @@ describe('converter.translateConverter', () => {
     expect(converter.translate(29)).equal('Veintinueve')
   })
 
-  it('Numbers 11 => 29 con sufijo', () => {
+  it('Numbers 11 => 29 using suffix', () => {
     expect(converter.translate(11, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Once cascos')
     expect(converter.translate(12, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Doce cascos')
     expect(converter.translate(13, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Trece cascos')
@@ -181,10 +190,6 @@ describe('converter.translateConverter', () => {
 
     expect(converter.translate(2837344, { case: NumToTextCaseStyle.UPPER_CASE, suffix: { plural: 'PESOS CON CERO CVS M/CTE.' } }))
       .equal('DOS MILLONES OCHOCIENTOS TREINTA Y SIETE MIL TRESCIENTOS CUARENTA Y CUATRO PESOS CON CERO CVS M/CTE.')
-
-
-    // DOS MILLONES OCHOCIENTOS TREINTA Y SIETE MIL TRESCIENTOS CUARENTA Y CUATRO PESOS CON CERO CVS M/CTE.
-
   })
 
   it('Millions rounded', () => {

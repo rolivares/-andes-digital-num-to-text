@@ -2,6 +2,8 @@
 
 Simple process in order to translate numbers to texts using spanish rules on cardinal numbering.
 
+* See more in <https://www.rae.es/dpd/cardinales>
+
 Process considers forms 'mild-mannered' (`apocopado`) and gender using options provided to translate method.
 
 ## Restrictions
