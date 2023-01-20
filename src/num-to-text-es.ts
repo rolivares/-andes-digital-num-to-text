@@ -1,6 +1,6 @@
-import { ICaseTransform } from './transforms/case-transform';
-import TRANSLATION_TEXTS from './translation-texts';
-import { Gender, INumToTextOptions } from './types';
+import { ICaseTransform } from './transforms/case-transform'
+import TRANSLATION_TEXTS from './translation-texts'
+import { Gender, INumToTextOptions } from './types'
 
 export default class NumToTextConverter {
 
@@ -22,20 +22,20 @@ export default class NumToTextConverter {
         case 0:
           if (part > 0 || (part === 0 && parts.length === 1))
             arr.push(this.reduceTranslation(part, mmForm, opts.gender))
-          break;
+          break
         case 1:
           if (part > 0)
             arr.push(this.directTranslate(1000 ** index, mmForm, opts.gender))
           if (part > 1) {
             arr.push(this.reduceTranslation(part, mmForm, opts.gender))
           }
-          break;
+          break
         case 2:
           arr.push(this.directTranslate(1000 ** index, singular, opts.gender))
           arr.push(this.reduceTranslation(part, true, opts.gender))
-          break;
+          break
         default:
-          break;
+          break
       }
     })
     arr.reverse()
@@ -51,7 +51,7 @@ export default class NumToTextConverter {
   }
 
   private ensureOptions(options?: INumToTextOptions): INumToTextOptions {
-    return { gender: 'M', case: 'TITLE_CASE', ...(options || {}) };
+    return { gender: 'M', case: 'TITLE_CASE', ...(options || {}) }
   }
 
   private getCasing(options: INumToTextOptions) {
