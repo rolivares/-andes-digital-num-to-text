@@ -1,0 +1,9 @@
+<testsuite name="Mocha Tests" tests="7" failures="0" errors="0" skipped="0" timestamp="Fri, 20 Jan 2023 01:23:45 GMT" time="0.028">
+<testcase classname="converter.translateConverter" name="Simple numbers" time="0.002"/>
+<testcase classname="converter.translateConverter" name="Numbers 11 =&#x3E; 29 " time="0.005"/>
+<testcase classname="converter.translateConverter" name="*nty numbers round" time="0.001"/>
+<testcase classname="converter.translateConverter" name="nty numbers with units" time="0.002"/>
+<testcase classname="LowerCaseTransform" name="Transform" time="0"/>
+<testcase classname="TitleCaseTransform" name="Transform" time="0"/>
+<testcase classname="UpperCaseTransform" name="Transform" time="0"/>
+</testsuite>

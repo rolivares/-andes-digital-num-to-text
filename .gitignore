@@ -308,3 +308,5 @@ logs/
 .vscode/
 
 .logger*/
+
+.secrets

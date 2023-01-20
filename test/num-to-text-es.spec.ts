@@ -27,7 +27,7 @@ describe("converter.translateConverter", () => {
     expect(converter.translate(10)).equal('Diez');
   })
 
-  it(`Numbers 11 => 19 `, () => {
+  it(`Numbers 11 => 29 `, () => {
     expect(converter.translate(11)).equal('Once');
     expect(converter.translate(12)).equal('Doce');
     expect(converter.translate(13)).equal('Trece');
@@ -37,9 +37,19 @@ describe("converter.translateConverter", () => {
     expect(converter.translate(17)).equal('Diecisiete');
     expect(converter.translate(18)).equal('Dieciocho');
     expect(converter.translate(19)).equal('Diecinueve');
+    expect(converter.translate(20)).equal('Veinte');
+    expect(converter.translate(21)).equal('Veintiuno');
+    expect(converter.translate(22)).equal('Veintidós');
+    expect(converter.translate(23)).equal('Veintitrés');
+    expect(converter.translate(24)).equal('Veinticuatro');
+    expect(converter.translate(25)).equal('Veinticinco');
+    expect(converter.translate(26)).equal('Veintiséis');
+    expect(converter.translate(27)).equal('Veintisiete');
+    expect(converter.translate(28)).equal('Veintiocho');
+    expect(converter.translate(29)).equal('Veintinueve');
   })
 
-  it(`*nty numbers`, () => {
+  it(`*nty numbers round`, () => {
     expect(converter.translate(20)).equal('Veinte');
     expect(converter.translate(30)).equal('Treinta');
     expect(converter.translate(40)).equal('Cuarenta');
@@ -49,6 +59,30 @@ describe("converter.translateConverter", () => {
     expect(converter.translate(80)).equal('Ochenta');
     expect(converter.translate(90)).equal('Noventa');
   })
+
+  it(`nty numbers with units`, () => {
+    expect(converter.translate(37)).equal('Treinta y siete');
+    expect(converter.translate(46)).equal('Cuarenta y seis');
+    expect(converter.translate(44)).equal('Cuarenta y cuatro');
+    expect(converter.translate(51)).equal('Cincuenta y uno');
+    expect(converter.translate(61)).equal('Sesenta y uno');
+    expect(converter.translate(79)).equal('Setenta y nueve');
+    expect(converter.translate(88)).equal('Ochenta y ocho');
+    expect(converter.translate(93)).equal('Noventa y tres');
+  })
+
+
+  // it(`Hundreded numbers`, () => {
+  //   expect(converter.translate(151)).equal('Ciento cincuenta y uno');
+  //   expect(converter.translate(221)).equal('Doscientos veintiuno');
+  //   expect(converter.translate(346)).equal('Trescientos cuarenta y seis');
+  //   expect(converter.translate(444)).equal('Cuatrocientos cuarenta y cuatro');
+  //   expect(converter.translate(511)).equal('Quinientos once');
+  //   expect(converter.translate(601)).equal('Seiscientos uno');
+  //   expect(converter.translate(700)).equal('Setecientos');
+  //   expect(converter.translate(899)).equal('Ochocientos noventa y nueve');
+  //   expect(converter.translate(923)).equal('Novecientos veintitrés');
+  // })
 
   // it(`Hundred numbers`, () => {
   //   expect(converter.translate(100)).equal('Cien');

@@ -1,8 +1,13 @@
 import { ICaseTransform } from 'src/transforms/case-transform';
-import { TRANSLATION_TEXTS } from 'src/translation-texts';
+import { PECULIAR_TEXTS, TENS_TEXTS } from 'src/translation-texts';
 import { INumToTextOptions } from 'src/types';
 
 export default class NumToTextConverter {
+
+  private texts = {
+    ones: PECULIAR_TEXTS,
+    tens: TENS_TEXTS
+  }
 
   constructor(private transforms: ICaseTransform[]) { }
 
@@ -20,14 +25,12 @@ export default class NumToTextConverter {
     const opts = this.getOptions(options)
     const casing = this.getCasing(opts)
 
+    const arr: string[] = []
     const parts = this.getParts(num).reverse()
-    for (let index = 0; index < parts.length; index += 1) {
-      const element = parts[index];
-    }
-    let ret: string
-    if (num >= 0 && num < 20) {
-      ret = this.translateForOnes(num, false)
-    }
+    parts.forEach((part, index) => {
+      arr.push(this.getTranslation(part, false))
+    })
+    const ret = arr.join(' ')
     return casing.transform(ret)
   }
 
@@ -35,10 +38,33 @@ export default class NumToTextConverter {
     return num.toLocaleString('es-cl', { maximumFractionDigits: 0 }).split('.').map(chunk => parseInt(chunk, 10))
   }
 
-  private translateForOnes(num: number, mmForm: boolean): string {
-    const text = TRANSLATION_TEXTS.find(t => t.num === num)
-    if (!text) return `(${num})`
+  private getTranslation(num: number, mmForm: boolean): string {
+    if (num >= 0 && num < 30) {
+      return this.translatePeculiars(num, mmForm)
+    }
+    if (num < 100) { // 98
+      const units = num % 10
+      if (units === 0) {
+        return this.translateTens(num, mmForm) // 90
+      }
+      return `${this.translateTens(num - units, mmForm)} y ${this.getTranslation(units, mmForm)}`
+    }
+    return this.getNoTranslate(num)
+  }
+
+  private translatePeculiars(num: number, mmForm: boolean): string {
+    const text = this.texts.ones.find(t => t.num === num)
+    if (!text) return this.getNoTranslate(num)
     return (mmForm ? (text.mm || text.txt) : text.txt)
+  }
+
+  private translateTens(num: number, mmForm: boolean): string {
+    const text = this.texts.tens.find(t => t.num === num)
+    return (mmForm ? (text.mm || text.txt) : text.txt)
+  }
+
+  private getNoTranslate(num: number): string {
+    return `(${num})`
   }
 
 }
