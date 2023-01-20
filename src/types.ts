@@ -4,8 +4,10 @@ export type NumToTextCasing = 'UPPER_CASE' | 'LOWER_CASE' | 'TITLE_CASE'
 export interface INumToTextOptions {
   gender?: Gender,
   case?: NumToTextCasing,
-  suffixP?: string
-  suffixS?: string
+  suffix?: {
+    plural: string
+    singular: string
+  }
 }
 
 export interface ITranslationText {

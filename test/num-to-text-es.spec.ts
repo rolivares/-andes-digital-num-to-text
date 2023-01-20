@@ -27,6 +27,11 @@ describe("converter.translateConverter", () => {
     expect(converter.translate(10)).equal('Diez');
   })
 
+  it(`Simple numbers fem`, () => {
+    expect(converter.translate(1, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Una pera');
+    expect(converter.translate(2, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Dos peras');
+  })
+
   it(`Numbers 11 => 29 `, () => {
     expect(converter.translate(11)).equal('Once');
     expect(converter.translate(12)).equal('Doce');
@@ -50,40 +55,37 @@ describe("converter.translateConverter", () => {
   })
 
   it(`Numbers 11 => 29 con sufijo`, () => {
-    expect(converter.translate(11, { suffixP: 'cascos' })).equal('Once cascos');
-    expect(converter.translate(12, { suffixP: 'cascos' })).equal('Doce cascos');
-    expect(converter.translate(13, { suffixP: 'cascos' })).equal('Trece cascos');
-    expect(converter.translate(14, { suffixP: 'cascos' })).equal('Catorce cascos');
-    expect(converter.translate(15, { suffixP: 'cascos' })).equal('Quince cascos');
-    expect(converter.translate(16, { suffixP: 'cascos' })).equal('Dieciséis cascos');
-    expect(converter.translate(17, { suffixP: 'cascos' })).equal('Diecisiete cascos');
-    expect(converter.translate(18, { suffixP: 'cascos' })).equal('Dieciocho cascos');
-    expect(converter.translate(19, { suffixP: 'cascos' })).equal('Diecinueve cascos');
-    expect(converter.translate(20, { suffixP: 'cascos' })).equal('Veinte cascos');
-    expect(converter.translate(21, { suffixP: 'cascos' })).equal('Veintiún cascos');
-    expect(converter.translate(22, { suffixP: 'cascos' })).equal('Veintidós cascos');
-    expect(converter.translate(23, { suffixP: 'cascos' })).equal('Veintitrés cascos');
-    expect(converter.translate(24, { suffixP: 'cascos' })).equal('Veinticuatro cascos');
-    expect(converter.translate(25, { suffixP: 'cascos' })).equal('Veinticinco cascos');
-    expect(converter.translate(26, { suffixP: 'cascos' })).equal('Veintiséis cascos');
-    expect(converter.translate(27, { suffixP: 'cascos' })).equal('Veintisiete cascos');
-    expect(converter.translate(28, { suffixP: 'cascos' })).equal('Veintiocho cascos');
-    expect(converter.translate(29, { suffixP: 'cascos' })).equal('Veintinueve cascos');
+    expect(converter.translate(11, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Once cascos');
+    expect(converter.translate(12, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Doce cascos');
+    expect(converter.translate(13, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Trece cascos');
+    expect(converter.translate(14, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Catorce cascos');
+    expect(converter.translate(15, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Quince cascos');
+    expect(converter.translate(16, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Dieciséis cascos');
+    expect(converter.translate(17, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Diecisiete cascos');
+    expect(converter.translate(18, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Dieciocho cascos');
+    expect(converter.translate(19, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Diecinueve cascos');
+    expect(converter.translate(20, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Veinte cascos');
+    expect(converter.translate(21, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Veintiún cascos');
+    expect(converter.translate(22, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Veintidós cascos');
+    expect(converter.translate(23, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Veintitrés cascos');
+    expect(converter.translate(24, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Veinticuatro cascos');
+    expect(converter.translate(25, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Veinticinco cascos');
+    expect(converter.translate(26, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Veintiséis cascos');
+    expect(converter.translate(27, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Veintisiete cascos');
+    expect(converter.translate(28, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Veintiocho cascos');
+    expect(converter.translate(29, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Veintinueve cascos');
   })
 
   it(`Numbers 11 => 29 con sufijo femenino`, () => {
-    expect(converter.translate(13, { suffixP: 'peras', gender: 'F' })).equal('Trece peras');
-    expect(converter.translate(14, { suffixP: 'peras', gender: 'F' })).equal('Catorce peras');
-    expect(converter.translate(15, { suffixP: 'peras', gender: 'F' })).equal('Quince peras');
-    expect(converter.translate(16, { suffixP: 'peras', gender: 'F' })).equal('Dieciséis peras');
-    expect(converter.translate(20, { suffixP: 'peras', gender: 'F' })).equal('Veinte peras');
-    expect(converter.translate(21, { suffixP: 'peras', gender: 'F' })).equal('Veintiuna peras');
+    expect(converter.translate(13, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Trece peras');
+    expect(converter.translate(14, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Catorce peras');
+    expect(converter.translate(15, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Quince peras');
+    expect(converter.translate(16, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Dieciséis peras');
+    expect(converter.translate(20, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Veinte peras');
+    expect(converter.translate(21, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Veintiuna peras');
   })
 
-  it(`Simple numbers fem`, () => {
-    expect(converter.translate(1, { suffixP: 'peras', gender: 'F' })).equal('Una peras');
-    expect(converter.translate(2, { suffixP: 'peras', gender: 'F' })).equal('Dos peras');
-  })
+
 
   it(`*nty numbers round`, () => {
     expect(converter.translate(20)).equal('Veinte');
@@ -159,15 +161,18 @@ describe("converter.translateConverter", () => {
 
   it(`Others numbers`, () => {
     expect(converter.translate(1294)).equal('Mil doscientos noventa y cuatro');
-    expect(converter.translate(1001, { suffixP: 'pesos' })).equal('Mil un pesos', `con sufijo terminación 'un'`);
+    expect(converter.translate(1001, { suffix: { plural: 'pesos', singular: 'peso' } }))
+      .equal('Mil un pesos', `con sufijo terminación 'un'`);
     expect(converter.translate(1001)).equal('Mil uno');
     expect(converter.translate(116000)).equal('Ciento dieciséis mil');
     expect(converter.translate(935978)).equal('Novecientos treinta y cinco mil novecientos setenta y ocho');
     expect(converter.translate(31511003)).equal('Treinta y un millones quinientos once mil tres');
 
     // TODO: error ortográfico
-    expect(converter.translate(1236721, { suffixP: 'pesos' })).equal('Un millón doscientos treinta y seis mil setecientos veintiún pesos');
-    expect(converter.translate(423, { suffixP: 'pesos' })).equal('Cuatrocientos veintitrés pesos');
+    expect(converter.translate(1236721, { suffix: { plural: 'pesos', singular: 'peso' } }))
+      .equal('Un millón doscientos treinta y seis mil setecientos veintiún pesos');
+    expect(converter.translate(423, { suffix: { plural: 'pesos', singular: 'peso' } }))
+      .equal('Cuatrocientos veintitrés pesos');
     expect(converter.translate(423)).equal('Cuatrocientos veintitrés');
 
     expect(converter.translate(1236721)).equal('Un millón doscientos treinta y seis mil setecientos veintiuno');
@@ -177,8 +182,10 @@ describe("converter.translateConverter", () => {
 
   it(`Millions rounded`, () => {
     expect(converter.translate(154821)).equal('Ciento cincuenta y cuatro mil ochocientos veintiuno');
-    expect(converter.translate(154821, { suffixP: 'pesos' })).equal('Ciento cincuenta y cuatro mil ochocientos veintiún pesos');
-    expect(converter.translate(154821, { suffixP: 'personas', gender: 'F' })).equal('Ciento cincuenta y cuatro mil ochocientos veintiuna personas');
+    expect(converter.translate(154821, { suffix: { plural: 'pesos', singular: 'peso' } }))
+      .equal('Ciento cincuenta y cuatro mil ochocientos veintiún pesos');
+    expect(converter.translate(154821, { suffix: { plural: 'personas', singular: 'persona' }, gender: 'F' }))
+      .equal('Ciento cincuenta y cuatro mil ochocientos veintiuna personas');
   })
 
 });

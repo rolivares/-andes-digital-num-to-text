@@ -11,7 +11,7 @@ export default class NumToTextConverter {
   translate(num: number, options?: INumToTextOptions): string {
     const opts = this.getOptions(options)
     const casing = this.getCasing(opts)
-    const mmForm = !!options?.suffixP
+    const mmForm = !!options?.suffix
     const arr: string[] = []
     const parts = this.getParts(num).reverse()
 
@@ -38,8 +38,15 @@ export default class NumToTextConverter {
           break;
       }
     })
-    const ret = `${arr.reverse().join(' ')} ${options?.suffixP || ''}`.trim()
+    const ret = `${arr.reverse().join(' ')} ${this.getSuffix(num, opts)}`.trim()
     return casing.transform(ret)
+  }
+
+  private getSuffix(num: number, options: INumToTextOptions): string {
+    if (options.suffix) {
+      return num === 1 ? options.suffix.singular : options.suffix.plural
+    }
+    return ''
   }
 
   private getOptions(options?: INumToTextOptions): INumToTextOptions {
