@@ -1,6 +1,19 @@
 # Description
 
-Utilidad creada para la traducción de números y cifras a español, considerando forma apocopada y género.
+Simple process in order to translate numbers to texts using spanish rules on cardinal numbering.
+
+Process considers forms 'mild-mannered' (`apocopado`) and gender using options provided to translate method.
+
+## Restrictions
+
+Number to translate is using only integer part in order to translate.
+
+## Next versions
+
+* Simplify translate process
+* Spanish billions compatibility
+* Decimal parts
+* Automatic pluralization
 
 ## Installation
 

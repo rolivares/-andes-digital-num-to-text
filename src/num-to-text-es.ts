@@ -1,6 +1,6 @@
-import { ICaseTransform } from './transforms/case-transform';
-import TRANSLATION_TEXTS from './translation-texts';
-import { Gender, INumToTextOptions } from './types';
+import { ICaseTransform } from './transforms/case-transform'
+import TRANSLATION_TEXTS from './translation-texts'
+import { Gender, INumToTextOptions } from './types'
 
 export default class NumToTextConverter {
 
@@ -9,7 +9,7 @@ export default class NumToTextConverter {
   constructor(private transforms: ICaseTransform[]) { }
 
   translate(num: number, options?: INumToTextOptions): string {
-    const opts = this.getOptions(options)
+    const opts = this.ensureOptions(options)
     const casing = this.getCasing(opts)
     const mmForm = !!options?.suffix
     const arr: string[] = []
@@ -22,23 +22,24 @@ export default class NumToTextConverter {
         case 0:
           if (part > 0 || (part === 0 && parts.length === 1))
             arr.push(this.reduceTranslation(part, mmForm, opts.gender))
-          break;
+          break
         case 1:
           if (part > 0)
             arr.push(this.directTranslate(1000 ** index, mmForm, opts.gender))
           if (part > 1) {
             arr.push(this.reduceTranslation(part, mmForm, opts.gender))
           }
-          break;
+          break
         case 2:
-          arr.push(this.directTranslate(1000 ** index, singular, opts.gender))
-          arr.push(this.reduceTranslation(part, true, opts.gender))
-          break;
+          arr.push(this.directTranslate(1000 ** index, singular, 'M'))
+          arr.push(this.reduceTranslation(part, true,  'M'))
+          break
         default:
-          break;
+          break
       }
     })
-    const ret = `${arr.reverse().join(' ')} ${this.getSuffix(num, opts)}`.trim()
+    arr.reverse()
+    const ret = `${arr.join(' ')} ${this.getSuffix(num, opts)}`.trim()
     return casing.transform(ret)
   }
 
@@ -49,8 +50,8 @@ export default class NumToTextConverter {
     return ''
   }
 
-  private getOptions(options?: INumToTextOptions): INumToTextOptions {
-    return { gender: 'M', case: 'TITLE_CASE', ...(options || {}) };
+  private ensureOptions(options?: INumToTextOptions): INumToTextOptions {
+    return { gender: 'M', case: 'TITLE_CASE', ...(options || {}) }
   }
 
   private getCasing(options: INumToTextOptions) {
