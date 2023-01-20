@@ -28,7 +28,7 @@
   "scripts": {
     "test": "mkdirp ./reports && mocha --reporter mocha-multi-reporters",
     "test:watch": "mkdirp ./reports && mocha --watch --watch-files src,test --reporter mocha-multi-reporters",
-    "test:coverage": "nyc mocha --config .mocharc.json",
+    "test:coverage": "nyc mocha  --config .mocharc.json --reporter mocha-multi-reporters",
     "test:coverage:dark": "npm run test:coverage && cp ./node_modules/nyc-dark/*.css reports/coverage/",
     "test:sonar": "sonar-scanner -D sonar.projectKey=${npm_package_name} -D sonar.projectVersion=${npm_package_version}",
     "update": "updates --update --minor && npm install",
@@ -68,6 +68,7 @@
     "mocha": "^10.2.0",
     "mocha-junit-reporter": "^2.2.0",
     "mocha-multi-reporters": "^1.5.1",
+    "mochawesome": "^7.1.3",
     "module-alias": "^2.2.2",
     "nyc": "^15.1.0",
     "nyc-dark": "^3.0.3",
@@ -77,12 +78,10 @@
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "updates": "^13.2.8"
   },
   "husky": {
     "pre-commit": "npm run lint"
-  },
-  "dependencies": {
-    "updates": "^13.2.8"
   }
 }
