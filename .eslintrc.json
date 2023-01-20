@@ -43,7 +43,10 @@
     "@typescript-eslint/unbound-method": 0,
     "indent": [
       "error",
-      2
+      2,
+      {
+        "SwitchCase": 1
+      }
     ],
     "sort-imports": [
       "error",

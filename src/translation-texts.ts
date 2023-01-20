@@ -2,7 +2,7 @@ import { ITranslationText } from 'src/types'
 
 const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 0, txt: 'cero' },
-  { num: 1, txt: 'uno' },
+  { num: 1, txt: 'uno', mm: 'un', fem: 'una' },
   { num: 2, txt: 'dos' },
   { num: 3, txt: 'tres' },
   { num: 4, txt: 'cuatro' },
@@ -22,7 +22,7 @@ const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 18, txt: 'dieciocho' },
   { num: 19, txt: 'diecinueve' },
   { num: 20, txt: 'veinte' },
-  { num: 21, txt: 'veintiuno', mm: 'ventiún' },
+  { num: 21, txt: 'veintiuno', mm: 'veintiún', fem: 'veintiuna' },
   { num: 22, txt: 'veintidós' },
   { num: 23, txt: 'veintitrés' },
   { num: 24, txt: 'veinticuatro' },
@@ -50,7 +50,9 @@ const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 800, txt: 'ochocientos' },
   { num: 900, txt: 'novecientos' },
 
-  { num: 1000, txt: 'mil' }
+  { num: 1000, txt: 'mil', mm: 'mil' },
+  { num: 1000000, txt: 'millones', mm: 'millón' },
+  { num: 1000000 * 1000000, txt: 'billones', mm: 'billón' }
 
 ]
 
