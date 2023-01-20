@@ -296,7 +296,6 @@ reports/
 .scanner*/
 
 .stryker*
-package-lock.json
 *.lock
 *.js
 

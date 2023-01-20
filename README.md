@@ -4,14 +4,14 @@ Utilidad creada para la traducción de números y cifras a español, considerand
 
 ## Installation
 
-```
-$ npm install --save num-to-text
+```sh
+npm install --save numero-a-texto
 ```
 
 ## Uso
 
 ```js
-const numToText = require('num-to-text-es')
+const numToText = require('numero-a-texto')
 
 numToText.translate(154821)
 # Numéric form
@@ -21,7 +21,7 @@ numToText.translate(154821, { suffix: 'pesos'})
 # Cardinal
 # 'Ciento cincuenta y cuatro mil ochocientos veintiún pesos'
 
-numToText.translate(154821, { suffix:'personas', gender: 'f' })
+numToText.translate(154821, { suffix:'personas', gender: 'F' })
 # Cardinal using female gender
 # 'Ciento cincuenta y cuatro mil ochocientos veintiuna personas'
 ```

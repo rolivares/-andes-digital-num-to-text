@@ -175,11 +175,10 @@ describe("converter.translateConverter", () => {
       .equal('Novecientos noventa y nueve millones novecientos noventa y nueve mil novecientos noventa y nueve');
   })
 
-  // it('converter.translate, casing', () => {
-  //   expect(converter.translate(1000, { case: 'UPPER_CASE' })).equal('MIL');
-  //   expect(converter.translate(1000, { case: 'LOWER_CASE' })).equal('mil');
-  //   expect(converter.translate(1000, { case: 'TITLE_CASE' })).equal('Mil');
-  // })
-
+  it(`Millions rounded`, () => {
+    expect(converter.translate(154821)).equal('Ciento cincuenta y cuatro mil ochocientos veintiuno');
+    expect(converter.translate(154821, { suffixP: 'pesos' })).equal('Ciento cincuenta y cuatro mil ochocientos veintiún pesos');
+    expect(converter.translate(154821, { suffixP: 'personas', gender: 'F' })).equal('Ciento cincuenta y cuatro mil ochocientos veintiuna personas');
+  })
 
 });
