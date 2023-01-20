@@ -1,6 +1,6 @@
 import { ITranslationText } from 'src/types'
 
-export const PECULIAR_TEXTS: ITranslationText[] = [
+const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 0, txt: 'cero' },
   { num: 1, txt: 'uno' },
   { num: 2, txt: 'dos' },
@@ -31,16 +31,30 @@ export const PECULIAR_TEXTS: ITranslationText[] = [
   { num: 27, txt: 'veintisiete' },
   { num: 28, txt: 'veintiocho' },
   { num: 29, txt: 'veintinueve' },
-]
 
-export const TENS_TEXTS: ITranslationText[] = [
-  { num: 20, txt: 'veinte' },
   { num: 30, txt: 'treinta' },
   { num: 40, txt: 'cuarenta' },
   { num: 50, txt: 'cincuenta' },
   { num: 60, txt: 'sesenta' },
   { num: 70, txt: 'setenta' },
   { num: 80, txt: 'ochenta' },
-  { num: 90, txt: 'noventa' }
+  { num: 90, txt: 'noventa' },
+
+  { num: 100, txt: 'cien' },
+  { num: 200, txt: 'doscientos' },
+  { num: 300, txt: 'trescientos' },
+  { num: 400, txt: 'cuatrocientos' },
+  { num: 500, txt: 'quinientos' },
+  { num: 600, txt: 'seiscientos' },
+  { num: 700, txt: 'setecientos' },
+  { num: 800, txt: 'ochocientos' },
+  { num: 900, txt: 'novecientos' },
+
+  { num: 1000, txt: 'mil' }
+
 ]
+
+export default TRANSLATION_TEXTS
+
+
 

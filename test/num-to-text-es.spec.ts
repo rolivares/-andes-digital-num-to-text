@@ -71,30 +71,29 @@ describe("converter.translateConverter", () => {
     expect(converter.translate(93)).equal('Noventa y tres');
   })
 
+  it(`Hundreded numbers`, () => {
+    expect(converter.translate(151)).equal('Ciento cincuenta y uno');
+    expect(converter.translate(221)).equal('Doscientos veintiuno');
+    expect(converter.translate(346)).equal('Trescientos cuarenta y seis');
+    expect(converter.translate(444)).equal('Cuatrocientos cuarenta y cuatro');
+    expect(converter.translate(511)).equal('Quinientos once');
+    expect(converter.translate(601)).equal('Seiscientos uno');
+    expect(converter.translate(700)).equal('Setecientos');
+    expect(converter.translate(899)).equal('Ochocientos noventa y nueve');
+    expect(converter.translate(923)).equal('Novecientos veintitrés');
+  })
 
-  // it(`Hundreded numbers`, () => {
-  //   expect(converter.translate(151)).equal('Ciento cincuenta y uno');
-  //   expect(converter.translate(221)).equal('Doscientos veintiuno');
-  //   expect(converter.translate(346)).equal('Trescientos cuarenta y seis');
-  //   expect(converter.translate(444)).equal('Cuatrocientos cuarenta y cuatro');
-  //   expect(converter.translate(511)).equal('Quinientos once');
-  //   expect(converter.translate(601)).equal('Seiscientos uno');
-  //   expect(converter.translate(700)).equal('Setecientos');
-  //   expect(converter.translate(899)).equal('Ochocientos noventa y nueve');
-  //   expect(converter.translate(923)).equal('Novecientos veintitrés');
-  // })
-
-  // it(`Hundred numbers`, () => {
-  //   expect(converter.translate(100)).equal('Cien');
-  //   expect(converter.translate(200)).equal('Doscientos');
-  //   expect(converter.translate(300)).equal('Trescientos');
-  //   expect(converter.translate(400)).equal('Cuatrocientos');
-  //   expect(converter.translate(500)).equal('Quinientos');
-  //   expect(converter.translate(600)).equal('Seiscientos');
-  //   expect(converter.translate(700)).equal('Setecientos');
-  //   expect(converter.translate(800)).equal('Ochocientos');
-  //   expect(converter.translate(900)).equal('Novecientos');
-  // })
+  it(`Hundred numbers`, () => {
+    expect(converter.translate(100)).equal('Cien');
+    expect(converter.translate(200)).equal('Doscientos');
+    expect(converter.translate(300)).equal('Trescientos');
+    expect(converter.translate(400)).equal('Cuatrocientos');
+    expect(converter.translate(500)).equal('Quinientos');
+    expect(converter.translate(600)).equal('Seiscientos');
+    expect(converter.translate(700)).equal('Setecientos');
+    expect(converter.translate(800)).equal('Ochocientos');
+    expect(converter.translate(900)).equal('Novecientos');
+  })
 
   // it(`Thousand numbers`, () => {
   //   expect(converter.translate(1000)).equal('Mil');

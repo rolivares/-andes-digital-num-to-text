@@ -1,13 +1,10 @@
 import { ICaseTransform } from 'src/transforms/case-transform';
-import { PECULIAR_TEXTS, TENS_TEXTS } from 'src/translation-texts';
+import TRANSLATION_TEXTS from 'src/translation-texts';
 import { INumToTextOptions } from 'src/types';
 
 export default class NumToTextConverter {
 
-  private texts = {
-    ones: PECULIAR_TEXTS,
-    tens: TENS_TEXTS
-  }
+  private texts = TRANSLATION_TEXTS
 
   constructor(private transforms: ICaseTransform[]) { }
 
@@ -27,7 +24,7 @@ export default class NumToTextConverter {
 
     const arr: string[] = []
     const parts = this.getParts(num).reverse()
-    parts.forEach((part, index) => {
+    parts.forEach(part => {
       arr.push(this.getTranslation(part, false))
     })
     const ret = arr.join(' ')
@@ -45,21 +42,27 @@ export default class NumToTextConverter {
     if (num < 100) { // 98
       const units = num % 10
       if (units === 0) {
-        return this.translateTens(num, mmForm) // 90
+        return this.translatePeculiars(num, mmForm) // 90
       }
-      return `${this.translateTens(num - units, mmForm)} y ${this.getTranslation(units, mmForm)}`
+      return `${this.translatePeculiars(num - units, mmForm)} y ${this.getTranslation(units, mmForm)}`
+    }
+    if (num <= 999) {
+      const tens = num % 100
+      const hundreds = num - tens
+      if (tens === 0) {
+        return this.translatePeculiars(num, mmForm)
+      }
+      if (num <= 199) {
+        return `ciento ${this.getTranslation(num - 100, mmForm)}`
+      }
+      return `${this.translatePeculiars(hundreds, mmForm)} ${this.getTranslation(tens, mmForm)}`
     }
     return this.getNoTranslate(num)
   }
 
   private translatePeculiars(num: number, mmForm: boolean): string {
-    const text = this.texts.ones.find(t => t.num === num)
+    const text = this.texts.find(t => t.num === num)
     if (!text) return this.getNoTranslate(num)
-    return (mmForm ? (text.mm || text.txt) : text.txt)
-  }
-
-  private translateTens(num: number, mmForm: boolean): string {
-    const text = this.texts.tens.find(t => t.num === num)
     return (mmForm ? (text.mm || text.txt) : text.txt)
   }
 
