@@ -4,6 +4,7 @@
 
 * Sonar fixes
 * Fix some female translations on big numbers (ex: 'Ochocientas mil')
+* Update project dependencies
 
 ## v0.0.5
 
