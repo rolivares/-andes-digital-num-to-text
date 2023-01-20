@@ -2,6 +2,14 @@
   "name": "numero-a-texto",
   "version": "0.0.2",
   "description": "Translate numbers to spanish",
+  "publishConfig": {
+    "access": "public",
+    "tag": "num-to-text español palabras traducción translate words"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rolivares/num-to-text-es-js"
+  },
   "main": "./dist/index.ts",
   "types": "./dist/index.d.ts",
   "files": [
