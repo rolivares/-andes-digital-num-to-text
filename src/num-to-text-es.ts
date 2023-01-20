@@ -1,6 +1,6 @@
 import { ICaseTransform } from './transforms/case-transform'
 import TRANSLATION_TEXTS from './translation-texts'
-import { INumToTextOptions, NumToTextCasing, NumToTextGenderStyle } from './types'
+import { INumToTextOptions, NumToTextCaseStyle, NumToTextGenderStyle } from './types'
 
 export default class NumToTextConverter {
 
@@ -35,6 +35,7 @@ export default class NumToTextConverter {
           arr.push(this.reduceTranslation(part, true, NumToTextGenderStyle.MASCULINE))
           break
         default:
+          arr.push(this.reduceTranslation(part, true, NumToTextGenderStyle.MASCULINE))
           break
       }
     })
@@ -51,7 +52,7 @@ export default class NumToTextConverter {
   }
 
   private ensureOptions(options?: INumToTextOptions): INumToTextOptions {
-    return { gender: NumToTextGenderStyle.MASCULINE, case: NumToTextCasing.TITLE_CASE, ...(options || {}) }
+    return { gender: NumToTextGenderStyle.MASCULINE, case: NumToTextCaseStyle.TITLE_CASE, ...(options || {}) }
   }
 
   private getCasing(options: INumToTextOptions) {

@@ -1,7 +1,7 @@
-import { NumToTextCasing } from '../types'
+import { NumToTextCaseStyle } from '../types'
 
 export interface ICaseTransform {
-  readonly type: NumToTextCasing
+  readonly type: NumToTextCaseStyle
   transform(input: string): string
 }
 

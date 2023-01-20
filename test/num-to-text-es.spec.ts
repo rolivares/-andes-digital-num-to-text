@@ -5,7 +5,7 @@ import { ICaseTransform } from 'src/transforms/case-transform'
 import LowerCaseTransform from 'src/transforms/lower-case-transform'
 import TitleCaseTransform from 'src/transforms/title-case-transform'
 import UpperCaseTransform from 'src/transforms/upper-case-transform'
-import { NumToTextGenderStyle } from 'src/types'
+import { NumToTextCaseStyle, NumToTextGenderStyle } from 'src/types'
 
 describe('converter.translateConverter', () => {
   const transforms: ICaseTransform[] = [
@@ -160,7 +160,7 @@ describe('converter.translateConverter', () => {
     expect(converter.translate(9000000)).equal('Nueve millones')
   })
 
-  it('Others numbers', () => {
+  it('Others numbers special cases', () => {
     expect(converter.translate(1294)).equal('Mil doscientos noventa y cuatro')
     expect(converter.translate(1001, { suffix: { plural: 'pesos', singular: 'peso' } }))
       .equal('Mil un pesos', 'con sufijo terminación \'un\'')
@@ -178,6 +178,13 @@ describe('converter.translateConverter', () => {
     expect(converter.translate(1236721)).equal('Un millón doscientos treinta y seis mil setecientos veintiuno')
     expect(converter.translate(999999999))
       .equal('Novecientos noventa y nueve millones novecientos noventa y nueve mil novecientos noventa y nueve')
+
+    expect(converter.translate(2837344, { case: NumToTextCaseStyle.UPPER_CASE, suffix: { plural: 'PESOS CON CERO CVS M/CTE.' } }))
+      .equal('DOS MILLONES OCHOCIENTOS TREINTA Y SIETE MIL TRESCIENTOS CUARENTA Y CUATRO PESOS CON CERO CVS M/CTE.')
+
+
+    // DOS MILLONES OCHOCIENTOS TREINTA Y SIETE MIL TRESCIENTOS CUARENTA Y CUATRO PESOS CON CERO CVS M/CTE.
+
   })
 
   it('Millions rounded', () => {
