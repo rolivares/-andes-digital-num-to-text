@@ -184,7 +184,11 @@ describe('converter.translateConverter', () => {
     expect(converter.translate(154821, { suffix: { plural: 'pesos', singular: 'peso' } }))
       .equal('Ciento cincuenta y cuatro mil ochocientos veintiún pesos')
     expect(converter.translate(154821, { suffix: { plural: 'personas', singular: 'persona' }, gender: 'F' }))
-      .equal('Ciento cincuenta y cuatro mil ochocientos veintiuna personas')
+      .equal('Ciento cincuenta y cuatro mil ochocientas veintiuna personas')
+    expect(converter.translate(181154821, { suffix: { plural: 'personas', singular: 'persona' }, gender: 'F' }))
+      .equal('Ciento ochenta y un millones ciento cincuenta y cuatro mil ochocientas veintiuna personas')
+    expect(converter.translate(181154821, { suffix: { plural: 'pesos', singular: 'peso' }, gender: 'M' }))
+      .equal('Ciento ochenta y un millones ciento cincuenta y cuatro mil ochocientos veintiún pesos')
   })
 
 })

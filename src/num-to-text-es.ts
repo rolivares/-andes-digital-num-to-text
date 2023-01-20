@@ -31,8 +31,8 @@ export default class NumToTextConverter {
           }
           break
         case 2:
-          arr.push(this.directTranslate(1000 ** index, singular, opts.gender))
-          arr.push(this.reduceTranslation(part, true, opts.gender))
+          arr.push(this.directTranslate(1000 ** index, singular, 'M'))
+          arr.push(this.reduceTranslation(part, true,  'M'))
           break
         default:
           break
