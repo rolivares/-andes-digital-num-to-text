@@ -310,3 +310,4 @@ logs/
 .logger*/
 
 .secrets
+xunit.xml
