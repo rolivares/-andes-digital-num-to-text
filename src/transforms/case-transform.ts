@@ -1,4 +1,4 @@
-import { NumToTextCasing } from 'src/types'
+import { NumToTextCasing } from '../types'
 
 export interface ICaseTransform {
   readonly type: NumToTextCasing

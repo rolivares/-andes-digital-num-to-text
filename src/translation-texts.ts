@@ -1,4 +1,4 @@
-import { ITranslationText } from 'src/types'
+import { ITranslationText } from './types'
 
 const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 0, txt: 'cero' },

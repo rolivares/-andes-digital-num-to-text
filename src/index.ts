@@ -1,5 +1,5 @@
-import NumToTextConverter from 'src/num-to-text-es'
-import * as Types from 'src/types'
+import NumToTextConverter from './num-to-text-es'
+import * as Types from './types'
 
 export {
   NumToTextConverter,

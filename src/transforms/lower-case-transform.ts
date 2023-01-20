@@ -1,5 +1,5 @@
-import { ICaseTransform } from 'src/transforms/case-transform'
-import { NumToTextCasing } from 'src/types'
+import { ICaseTransform } from './case-transform'
+import { NumToTextCasing } from '../types'
 
 export default class LowerCaseTransform implements ICaseTransform {
   get type(): NumToTextCasing {

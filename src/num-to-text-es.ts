@@ -1,6 +1,6 @@
-import { ICaseTransform } from 'src/transforms/case-transform';
-import TRANSLATION_TEXTS from 'src/translation-texts';
-import { Gender, INumToTextOptions } from 'src/types';
+import { ICaseTransform } from './transforms/case-transform';
+import TRANSLATION_TEXTS from './translation-texts';
+import { Gender, INumToTextOptions } from './types';
 
 export default class NumToTextConverter {
 
