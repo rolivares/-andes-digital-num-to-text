@@ -1,4 +1,4 @@
-import NumToTextConverter from './num-to-text-es'
+import EsNumToTextConverter from './num-to-text-es'
 import { ICaseTransform } from './transforms/case-transform'
 import LowerCaseTransform from './transforms/lower-case-transform'
 import TitleCaseTransform from './transforms/title-case-transform'
@@ -11,10 +11,10 @@ const transforms: ICaseTransform[] = [
   new TitleCaseTransform()
 ]
 
-const defaultConverter = new NumToTextConverter(transforms)
+const defaultConverter = new EsNumToTextConverter(transforms)
 
 export {
   defaultConverter as numToText,
-  NumToTextConverter,
+  EsNumToTextConverter as NumToTextConverter,
   Types
 }

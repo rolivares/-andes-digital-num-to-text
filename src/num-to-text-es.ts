@@ -1,8 +1,8 @@
 import { ICaseTransform } from './transforms/case-transform'
 import TRANSLATION_TEXTS from './translation-texts'
-import { Gender, INumToTextOptions } from './types'
+import { Gender, INumToTextConverter, INumToTextOptions } from './types'
 
-export default class NumToTextConverter {
+export default class EsNumToTextConverter implements INumToTextConverter {
 
   private texts = TRANSLATION_TEXTS
 
@@ -32,7 +32,7 @@ export default class NumToTextConverter {
           break
         case 2:
           arr.push(this.directTranslate(1000 ** index, singular, 'M'))
-          arr.push(this.reduceTranslation(part, true,  'M'))
+          arr.push(this.reduceTranslation(part, true, 'M'))
           break
         default:
           break

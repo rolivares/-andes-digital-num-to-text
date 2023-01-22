@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
-import NumToTextConverter from 'src/num-to-text-es'
+import EsNumToTextConverter from 'src/num-to-text-es'
 import { ICaseTransform } from 'src/transforms/case-transform'
 import LowerCaseTransform from 'src/transforms/lower-case-transform'
 import TitleCaseTransform from 'src/transforms/title-case-transform'
@@ -12,7 +12,7 @@ describe('converter.translateConverter', () => {
     new UpperCaseTransform(),
     new TitleCaseTransform()
   ]
-  const converter = new NumToTextConverter(transforms)
+  const converter = new EsNumToTextConverter(transforms)
 
   it('Simple numbers', () => {
     expect(converter.translate(1)).equal('Uno')
