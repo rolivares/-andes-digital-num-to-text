@@ -3,7 +3,7 @@ import { ICaseTransform } from './transforms/case-transform'
 import LowerCaseTransform from './transforms/lower-case-transform'
 import TitleCaseTransform from './transforms/title-case-transform'
 import UpperCaseTransform from './transforms/upper-case-transform'
-import { INumToTextConverter } from './types'
+import { INumToTextConverter, NumToTextCaseStyle, NumToTextGenderStyle } from './types'
 
 
 const transforms: ICaseTransform[] = [
@@ -18,5 +18,7 @@ export {
   defaultConverter as numToText,
   EsNumToTextConverter as NumToTextConverter,
   EsNumToTextConverter,
-  INumToTextConverter
+  INumToTextConverter,
+  NumToTextCaseStyle,
+  NumToTextGenderStyle
 }

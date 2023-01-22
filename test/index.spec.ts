@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { describe } from 'mocha'
-import { numToText, NumToTextConverter } from 'src'
+import { numToText, NumToTextCaseStyle, NumToTextConverter, NumToTextGenderStyle } from 'src'
 
 describe('index', () => {
 
@@ -12,4 +12,8 @@ describe('index', () => {
     expect(new NumToTextConverter([])).is.not.null
   })
 
+  it('Types', () => {
+    expect(NumToTextCaseStyle.LOWER_CASE).is.not.null
+    expect(NumToTextGenderStyle.FEMININE).is.not.null
+  })
 })
