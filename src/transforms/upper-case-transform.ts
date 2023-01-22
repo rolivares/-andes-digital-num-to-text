@@ -1,8 +1,8 @@
 import { ICaseTransform } from './case-transform'
-import { NumToTextCasing } from '../types'
+import { NumToTextCaseStyle } from '../types'
 
 export default class UpperCaseTransform implements ICaseTransform {
-  get type(): NumToTextCasing {
+  get type(): NumToTextCaseStyle {
     return 'UPPER_CASE'
   }
 

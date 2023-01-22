@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.7
+
+* Re-enable coverage and set tests in targeting 100%
+
 ## v0.0.6
 
 * Sonar fixes

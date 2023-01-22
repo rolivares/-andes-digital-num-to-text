@@ -1,12 +1,16 @@
 {
-  "reporter": ["html", "lcov", "json", "text", "text-summary", "cobertura"],
+  "reporter": [
+    "html",
+    "lcov",
+    "text",
+    "text-summary",
+    "cobertura"
+  ],
   "report-dir": "./reports/coverage/",
   "include": [
-    "src/headers/**/*.ts",
-    "src/validator/**/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
-    "**/*.d.ts"
   ],
   "extension": [
     ".ts"

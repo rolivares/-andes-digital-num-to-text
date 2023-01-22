@@ -5,6 +5,8 @@ import { ICaseTransform } from 'src/transforms/case-transform'
 import LowerCaseTransform from 'src/transforms/lower-case-transform'
 import TitleCaseTransform from 'src/transforms/title-case-transform'
 import UpperCaseTransform from 'src/transforms/upper-case-transform'
+import { BILLION } from 'src/translation-texts'
+import { NumToTextCaseStyle, NumToTextGenderStyle } from 'src/types'
 
 describe('converter.translateConverter', () => {
   const transforms: ICaseTransform[] = [
@@ -13,6 +15,14 @@ describe('converter.translateConverter', () => {
     new TitleCaseTransform()
   ]
   const converter = new EsNumToTextConverter(transforms)
+
+  it('Accepted range', () => {
+    expect(() => converter.translate(BILLION)).throws()
+  })
+
+  it('Defaults', () => {
+    expect(converter.translate(33, { case: ('OTRO' as NumToTextCaseStyle) })).equal('Treinta y tres')
+  })
 
   it('Simple numbers', () => {
     expect(converter.translate(1)).equal('Uno')
@@ -28,8 +38,8 @@ describe('converter.translateConverter', () => {
   })
 
   it('Simple numbers fem', () => {
-    expect(converter.translate(1, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Una pera')
-    expect(converter.translate(2, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Dos peras')
+    expect(converter.translate(1, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Una pera')
+    expect(converter.translate(2, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Dos peras')
   })
 
   it('Numbers 11 => 29 ', () => {
@@ -54,7 +64,7 @@ describe('converter.translateConverter', () => {
     expect(converter.translate(29)).equal('Veintinueve')
   })
 
-  it('Numbers 11 => 29 con sufijo', () => {
+  it('Numbers 11 => 29 using suffix', () => {
     expect(converter.translate(11, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Once cascos')
     expect(converter.translate(12, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Doce cascos')
     expect(converter.translate(13, { suffix: { plural: 'cascos', singular: 'casco' } })).equal('Trece cascos')
@@ -77,12 +87,12 @@ describe('converter.translateConverter', () => {
   })
 
   it('Numbers 11 => 29 con sufijo femenino', () => {
-    expect(converter.translate(13, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Trece peras')
-    expect(converter.translate(14, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Catorce peras')
-    expect(converter.translate(15, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Quince peras')
-    expect(converter.translate(16, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Dieciséis peras')
-    expect(converter.translate(20, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Veinte peras')
-    expect(converter.translate(21, { suffix: { plural: 'peras', singular: 'pera' }, gender: 'F' })).equal('Veintiuna peras')
+    expect(converter.translate(13, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Trece peras')
+    expect(converter.translate(14, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Catorce peras')
+    expect(converter.translate(15, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Quince peras')
+    expect(converter.translate(16, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Dieciséis peras')
+    expect(converter.translate(20, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Veinte peras')
+    expect(converter.translate(21, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Veintiuna peras')
   })
 
 
@@ -159,7 +169,7 @@ describe('converter.translateConverter', () => {
     expect(converter.translate(9000000)).equal('Nueve millones')
   })
 
-  it('Others numbers', () => {
+  it('Others numbers special cases', () => {
     expect(converter.translate(1294)).equal('Mil doscientos noventa y cuatro')
     expect(converter.translate(1001, { suffix: { plural: 'pesos', singular: 'peso' } }))
       .equal('Mil un pesos', 'con sufijo terminación \'un\'')
@@ -177,15 +187,18 @@ describe('converter.translateConverter', () => {
     expect(converter.translate(1236721)).equal('Un millón doscientos treinta y seis mil setecientos veintiuno')
     expect(converter.translate(999999999))
       .equal('Novecientos noventa y nueve millones novecientos noventa y nueve mil novecientos noventa y nueve')
+
+    expect(converter.translate(2837344, { case: NumToTextCaseStyle.UPPER_CASE, suffix: { plural: 'PESOS CON CERO CVS M/CTE.' } }))
+      .equal('DOS MILLONES OCHOCIENTOS TREINTA Y SIETE MIL TRESCIENTOS CUARENTA Y CUATRO PESOS CON CERO CVS M/CTE.')
   })
 
   it('Millions rounded', () => {
     expect(converter.translate(154821)).equal('Ciento cincuenta y cuatro mil ochocientos veintiuno')
     expect(converter.translate(154821, { suffix: { plural: 'pesos', singular: 'peso' } }))
       .equal('Ciento cincuenta y cuatro mil ochocientos veintiún pesos')
-    expect(converter.translate(154821, { suffix: { plural: 'personas', singular: 'persona' }, gender: 'F' }))
+    expect(converter.translate(154821, { suffix: { plural: 'personas', singular: 'persona' }, gender: NumToTextGenderStyle.FEMININE }))
       .equal('Ciento cincuenta y cuatro mil ochocientas veintiuna personas')
-    expect(converter.translate(181154821, { suffix: { plural: 'personas', singular: 'persona' }, gender: 'F' }))
+    expect(converter.translate(181154821, { suffix: { plural: 'personas', singular: 'persona' }, gender: NumToTextGenderStyle.FEMININE }))
       .equal('Ciento ochenta y un millones ciento cincuenta y cuatro mil ochocientas veintiuna personas')
     expect(converter.translate(181154821, { suffix: { plural: 'pesos', singular: 'peso' }, gender: 'M' }))
       .equal('Ciento ochenta y un millones ciento cincuenta y cuatro mil ochocientos veintiún pesos')
