@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rolivares/num-to-text-es-js"
+    "url": "https://github.com/rolivares/numero-a-texto-es-js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

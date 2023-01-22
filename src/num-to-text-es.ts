@@ -1,8 +1,8 @@
 import { ICaseTransform } from './transforms/case-transform'
 import TRANSLATION_TEXTS, { BILLION } from './translation-texts'
-import { INumToTextOptions, NumToTextCaseStyle, NumToTextGenderStyle } from './types'
+import { INumToTextConverter, INumToTextOptions, NumToTextCaseStyle, NumToTextGenderStyle } from './types'
 
-export default class NumToTextConverter {
+export default class EsNumToTextConverter implements INumToTextConverter {
 
   private texts = TRANSLATION_TEXTS
 

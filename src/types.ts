@@ -29,3 +29,8 @@ export interface ITranslationText {
   /** accent mark */
   readonly txtAlt?: string
 }
+
+export interface INumToTextConverter {
+  translate(num: number, options?: INumToTextOptions): string
+}
+
