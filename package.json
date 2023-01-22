@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rolivares/num-to-text-es-js"
+    "url": "https://github.com/rolivares/numero-a-texto-es-js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -77,12 +77,10 @@
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "updates": "^13.2.8"
   },
   "husky": {
     "pre-commit": "npm run lint"
-  },
-  "dependencies": {
-    "updates": "^13.2.8"
   }
 }
