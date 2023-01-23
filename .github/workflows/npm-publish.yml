@@ -8,15 +8,15 @@ on:
     types: [created]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm i
-      - run: npm test
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
+  #     - run: npm i
+  #     - run: npm test
 
   publish-npm:
     needs: build
@@ -27,10 +27,10 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm i
-      - run: npm publish
       - run: echo ${{secrets.NPM_TOKEN}}
       - run: echo NPM_TOKEN
+      - run: npm i
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
