@@ -8,7 +8,8 @@ Process considers forms 'apocopate' (`apocopado`) and gender using options provi
 
 ## Restrictions
 
-Number to translate is using only integer part in order to translate.
+* Number to translate is using only integer part in order to translate.
+* Compatible for numbers between [0 ... 999.999.999.999] (1 billion - 1)
 
 ## Next versions
 
