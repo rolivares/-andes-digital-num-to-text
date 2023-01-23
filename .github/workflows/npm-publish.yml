@@ -26,8 +26,6 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-          always-auth: true
-      - run: cat /home/runner/work/_temp/.npmrc
       - run: npm i
       - run: npm publish
         env:
