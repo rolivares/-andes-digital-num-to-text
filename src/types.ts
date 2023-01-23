@@ -24,8 +24,8 @@ export interface ITranslationText {
   readonly num: number
   readonly txt: string
   readonly fem?: string
-  /** mild-mannered */
-  readonly mm?: string
+  /** apocopate */
+  readonly ap?: string
   /** accent mark */
   readonly txtAlt?: string
 }

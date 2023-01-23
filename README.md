@@ -4,7 +4,7 @@ Simple process in order to translate numbers to texts using spanish rules on car
 
 * See more in <https://www.rae.es/dpd/cardinales>
 
-Process considers forms 'mild-mannered' (`apocopado`) and gender using options provided to translate method.
+Process considers forms 'apocopate' (`apocopado`) and gender using options provided to translate method.
 
 ## Restrictions
 

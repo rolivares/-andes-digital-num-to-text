@@ -7,7 +7,7 @@ export const BILLION = MILLION * MILLION
 
 const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 0, txt: 'cero' },
-  { num: 1, txt: 'uno', mm: 'un', fem: 'una' },
+  { num: 1, txt: 'uno', ap: 'un', fem: 'una' },
   { num: 2, txt: 'dos' },
   { num: 3, txt: 'tres' },
   { num: 4, txt: 'cuatro' },
@@ -27,7 +27,7 @@ const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 18, txt: 'dieciocho' },
   { num: 19, txt: 'diecinueve' },
   { num: 20, txt: 'veinte' },
-  { num: 21, txt: 'veintiuno', mm: 'veintiún', fem: 'veintiuna' },
+  { num: 21, txt: 'veintiuno', ap: 'veintiún', fem: 'veintiuna' },
   { num: 22, txt: 'veintidós' },
   { num: 23, txt: 'veintitrés' },
   { num: 24, txt: 'veinticuatro' },
@@ -55,9 +55,9 @@ const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 800, txt: 'ochocientos', fem: 'ochocientas' },
   { num: 900, txt: 'novecientos', fem: 'novecientas' },
 
-  { num: THOUSAND, txt: 'mil', mm: 'mil' },
-  { num: MILLION, txt: 'millones', mm: 'millón' },
-  { num: BILLION, txt: 'billones', mm: 'billón' }
+  { num: THOUSAND, txt: 'mil', ap: 'mil' },
+  { num: MILLION, txt: 'millones', ap: 'millón' },
+  { num: BILLION, txt: 'billones', ap: 'billón' }
 
 ]
 

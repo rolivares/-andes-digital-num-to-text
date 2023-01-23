@@ -91,7 +91,7 @@ export default class EsNumToTextConverter implements INumToTextConverter {
   private directTranslate(num: number, mmForm: boolean, genderStyle: NumToTextGenderStyle): string {
     const text = this.texts.find(t => t.num === num)
     if (genderStyle === NumToTextGenderStyle.MASCULINE) {
-      return (mmForm ? (text.mm || text.txt) : text.txt)
+      return (mmForm ? (text.ap || text.txt) : text.txt)
     }
     return (text.fem || text.txt)
   }
