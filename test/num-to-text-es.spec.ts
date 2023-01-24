@@ -222,11 +222,11 @@ describe('EsNumToTextConverter', () => {
   })
 
   it('getExp: calculate exp', () => {
-    expect(converter.getDivisor(0)).equals(THOUSAND, '1.000')
-    expect(converter.getDivisor(1)).equals(MILLION, '1 millón')
-    expect(converter.getDivisor(2)).equals(BILLION, '1 billón')
-    expect(converter.getDivisor(3)).equals(TRILLION, '1 trillón')
-    expect(converter.getDivisor(4)).equals(QUADRILLION, '1 cuatrillón')
+    expect(converter.getPartsDivisor(0)).equals(THOUSAND, 'miles') // for: www.www.xxx.xxx.yyy.ZZZ
+    expect(converter.getPartsDivisor(1)).equals(MILLION, 'millones') // for: www.www.xxx.xxx.YYY.zzz
+    expect(converter.getPartsDivisor(2)).equals(BILLION, 'billones') // for: www.www.XXX.XXXX.yyy.zzz
+    expect(converter.getPartsDivisor(3)).equals(TRILLION, 'trillones') // for: WWW.WWW.xxx.xxx.yyy.zzz
+    expect(converter.getPartsDivisor(4)).equals(QUADRILLION, 'cuatrillones')
   })
 
 
@@ -302,7 +302,7 @@ describe('EsNumToTextConverter', () => {
   })
 
 
-  it(`getParts MAX_VALUE_ALLOWED: ${  FIRST_VALUE_UNSUPPORTED.toLocaleString('es-cl')}`, () => {
+  it(`getParts MAX_VALUE_ALLOWED: ${FIRST_VALUE_UNSUPPORTED.toLocaleString('es-cl')}`, () => {
     const num = FIRST_VALUE_UNSUPPORTED
     const arr = converter.getParts(num)
     expect(arr.length).equals(4)

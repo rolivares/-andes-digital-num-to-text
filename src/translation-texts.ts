@@ -1,5 +1,9 @@
 import { ITranslationText } from './types'
 
+/** 10^0 */
+export const UNITS = 10 ** 0
+/** 10^1 */
+export const TENS = 10 ** 1
 /** 10^2 */
 export const HUNDRED = 10 ** 2
 /** 10^3 */
