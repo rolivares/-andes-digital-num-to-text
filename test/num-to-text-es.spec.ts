@@ -1,14 +1,14 @@
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
+import { NumToTextCaseStyle, NumToTextGenderStyle } from 'src'
 import EsNumToTextConverter from 'src/num-to-text-es'
 import { ICaseTransform } from 'src/transforms/case-transform'
 import LowerCaseTransform from 'src/transforms/lower-case-transform'
 import TitleCaseTransform from 'src/transforms/title-case-transform'
 import UpperCaseTransform from 'src/transforms/upper-case-transform'
-import { BILLION } from 'src/translation-texts'
-import { NumToTextCaseStyle, NumToTextGenderStyle } from 'src/types'
+import { BILLION, FIRST_VALUE_UNSUPPORTED, HUNDRED, MILLION, QUADRILLION, THOUSAND, TRILLION } from 'src/translation-texts'
 
-describe('converter.translateConverter', () => {
+describe('EsNumToTextConverter', () => {
   const transforms: ICaseTransform[] = [
     new LowerCaseTransform(),
     new UpperCaseTransform(),
@@ -16,15 +16,21 @@ describe('converter.translateConverter', () => {
   ]
   const converter = new EsNumToTextConverter(transforms)
 
-  it('Accepted range', () => {
-    expect(() => converter.translate(BILLION)).throws()
-  })
 
   it('Defaults', () => {
     expect(converter.translate(33, { case: ('OTRO' as NumToTextCaseStyle) })).equal('Treinta y tres')
   })
 
+  it('Accepted range', () => {
+    expect(converter.translate(HUNDRED)).equal('Cien')
+    expect(converter.translate(THOUSAND)).equal('Mil')
+    expect(converter.translate(MILLION)).equal('Un millón')
+    expect(converter.translate(BILLION)).equal('Un billón')
+    expect(() => converter.translate(FIRST_VALUE_UNSUPPORTED)).throws()
+  })
+
   it('Simple numbers', () => {
+    expect(converter.translate(0)).equal('Cero')
     expect(converter.translate(1)).equal('Uno')
     expect(converter.translate(2)).equal('Dos')
     expect(converter.translate(3)).equal('Tres')
@@ -95,8 +101,6 @@ describe('converter.translateConverter', () => {
     expect(converter.translate(21, { suffix: { plural: 'peras', singular: 'pera' }, gender: NumToTextGenderStyle.FEMININE })).equal('Veintiuna peras')
   })
 
-
-
   it('*nty numbers round', () => {
     expect(converter.translate(20)).equal('Veinte')
     expect(converter.translate(30)).equal('Treinta')
@@ -159,6 +163,7 @@ describe('converter.translateConverter', () => {
     expect(converter.translate(2345)).equal('Dos mil trescientos cuarenta y cinco')
     expect(converter.translate(345016)).equal('Trescientos cuarenta y cinco mil dieciséis')
     expect(converter.translate(1001)).equal('Mil uno')
+    expect(converter.translate(1321)).equal('Mil trescientos veintiuno', '1.321')
     expect(converter.translate(3011)).equal('Tres mil once')
     expect(converter.translate(999100)).equal('Novecientos noventa y nueve mil cien')
   })
@@ -167,29 +172,6 @@ describe('converter.translateConverter', () => {
     expect(converter.translate(1000000)).equal('Un millón')
     expect(converter.translate(2000000)).equal('Dos millones')
     expect(converter.translate(9000000)).equal('Nueve millones')
-  })
-
-  it('Others numbers special cases', () => {
-    expect(converter.translate(1294)).equal('Mil doscientos noventa y cuatro')
-    expect(converter.translate(1001, { suffix: { plural: 'pesos', singular: 'peso' } }))
-      .equal('Mil un pesos', 'con sufijo terminación \'un\'')
-    expect(converter.translate(1001)).equal('Mil uno')
-    expect(converter.translate(116000)).equal('Ciento dieciséis mil')
-    expect(converter.translate(935978)).equal('Novecientos treinta y cinco mil novecientos setenta y ocho')
-    expect(converter.translate(31511003)).equal('Treinta y un millones quinientos once mil tres')
-
-    expect(converter.translate(1236721, { suffix: { plural: 'pesos', singular: 'peso' } }))
-      .equal('Un millón doscientos treinta y seis mil setecientos veintiún pesos')
-    expect(converter.translate(423, { suffix: { plural: 'pesos', singular: 'peso' } }))
-      .equal('Cuatrocientos veintitrés pesos')
-    expect(converter.translate(423)).equal('Cuatrocientos veintitrés')
-
-    expect(converter.translate(1236721)).equal('Un millón doscientos treinta y seis mil setecientos veintiuno')
-    expect(converter.translate(999999999))
-      .equal('Novecientos noventa y nueve millones novecientos noventa y nueve mil novecientos noventa y nueve')
-
-    expect(converter.translate(2837344, { case: NumToTextCaseStyle.UPPER_CASE, suffix: { plural: 'PESOS CON CERO CVS M/CTE.' } }))
-      .equal('DOS MILLONES OCHOCIENTOS TREINTA Y SIETE MIL TRESCIENTOS CUARENTA Y CUATRO PESOS CON CERO CVS M/CTE.')
   })
 
   it('Millions rounded', () => {
@@ -204,4 +186,129 @@ describe('converter.translateConverter', () => {
       .equal('Ciento ochenta y un millones ciento cincuenta y cuatro mil ochocientos veintiún pesos')
   })
 
+  it('Others numbers special cases', () => {
+    expect(converter.translate(1294)).equal('Mil doscientos noventa y cuatro', '1294')
+    expect(converter.translate(1001, { suffix: { plural: 'pesos', singular: 'peso' } }), '1001')
+      .equal('Mil un pesos', 'con sufijo terminación \'un\'')
+    expect(converter.translate(1001)).equal('Mil uno', '1001')
+    expect(converter.translate(116000)).equal('Ciento dieciséis mil', '116000')
+    expect(converter.translate(935978)).equal('Novecientos treinta y cinco mil novecientos setenta y ocho', '935.978')
+    expect(converter.translate(31511003)).equal('Treinta y un millones quinientos once mil tres', '31.511.003')
+
+    expect(converter.translate(1236721, { suffix: { plural: 'pesos', singular: 'peso' } }))
+      .equal('Un millón doscientos treinta y seis mil setecientos veintiún pesos')
+    expect(converter.translate(423, { suffix: { plural: 'pesos', singular: 'peso' } }))
+      .equal('Cuatrocientos veintitrés pesos')
+    expect(converter.translate(423)).equal('Cuatrocientos veintitrés')
+
+    expect(converter.translate(1236721)).equal('Un millón doscientos treinta y seis mil setecientos veintiuno')
+    expect(converter.translate(999999999))
+      .equal('Novecientos noventa y nueve millones novecientos noventa y nueve mil novecientos noventa y nueve')
+
+    expect(converter.translate(BILLION - 1))
+      .equal(
+        'Novecientos noventa y nueve mil novecientos noventa y nueve millones novecientos noventa y nueve mil novecientos noventa y nueve',
+        'BILLON - 1')
+
+    expect(converter.translate(FIRST_VALUE_UNSUPPORTED - 1))
+      .equal(
+        'Nueve mil novecientos noventa y nueve billones ' +
+        'novecientos noventa y nueve mil novecientos noventa y nueve millones ' +
+        'novecientos noventa y nueve mil novecientos ochenta y ocho',
+        (FIRST_VALUE_UNSUPPORTED - 1).toLocaleString('es-CL'))
+
+    expect(converter.translate(2837344, { case: NumToTextCaseStyle.UPPER_CASE, suffix: { plural: 'PESOS CON CERO CVS M/CTE.' } }))
+      .equal('DOS MILLONES OCHOCIENTOS TREINTA Y SIETE MIL TRESCIENTOS CUARENTA Y CUATRO PESOS CON CERO CVS M/CTE.')
+  })
+
+  it('getExp: calculate exp', () => {
+    expect(converter.getDivisor(0)).equals(THOUSAND, '1.000')
+    expect(converter.getDivisor(1)).equals(MILLION, '1 millón')
+    expect(converter.getDivisor(2)).equals(BILLION, '1 billón')
+    expect(converter.getDivisor(3)).equals(TRILLION, '1 trillón')
+    expect(converter.getDivisor(4)).equals(QUADRILLION, '1 cuatrillón')
+  })
+
+
+  it('getPortion for billions', () => {
+    const num = 3643256789384 // 3.643.256.789.384
+    expect(converter.getPortion(num, 0)).equals(384, 'units')
+    expect(converter.getPortion(num, 1)).equals(789, 'thousands')
+    expect(converter.getPortion(num, 2)).equals(643256, 'millions')
+    expect(converter.getPortion(num, 3)).equals(3, 'billions')
+  })
+
+  it('getPortion for trillions', () => {
+    const num = 56783643256789384 // 3.643.256.789.384
+    expect(converter.getPortion(num, 0)).equals(384, 'units')
+    expect(converter.getPortion(num, 1)).equals(789, 'thousands')
+    expect(converter.getPortion(num, 2)).equals(643256, 'millions')
+    expect(converter.getPortion(num, 3)).equals(56783, 'billions')
+  })
+
+  it('getParts 999.000.000.000', () => {
+    const arr = converter.getParts(999000000000)
+    expect(arr.length).equals(3)
+    expect(arr[0]).equals(0)
+    expect(arr[1]).equals(0)
+    expect(arr[2]).equals(999000)
+  })
+
+
+
+
+  it('getParts 1.000', () => {
+    const arr = converter.getParts(1000)
+    expect(arr.length).equals(2)
+    expect(arr[0]).equals(0)
+    expect(arr[1]).equals(1)
+  })
+
+  it('getParts just minor than BILLION', () => {
+    const arr = converter.getParts(BILLION - 1)
+    expect(arr.length).equals(3)
+    expect(arr[0]).equals(999)
+    expect(arr[1]).equals(999)
+    expect(arr[2]).equals(999999)
+  })
+
+  it('getParts millions 456.322.145', () => {
+    const arr = converter.getParts(456322145)
+    expect(arr.length).equals(3)
+    expect(arr[0]).equals(145)
+    expect(arr[1]).equals(322)
+    expect(arr[2]).equals(456)
+  })
+
+  it('getParts millions 1.234.000', () => {
+    const arr = converter.getParts(1234000)
+    expect(arr.length).equals(3)
+    expect(arr[0]).equals(0)
+    expect(arr[1]).equals(234)
+    expect(arr[2]).equals(1)
+  })
+
+  it('getParts thousands 745321', () => {
+    const arr = converter.getParts(745321)
+    expect(arr.length).equals(2)
+    expect(arr[0]).equals(321)
+    expect(arr[1]).equals(745)
+  })
+
+  it('getParts hundred', () => {
+    const arr = converter.getParts(126)
+    expect(arr.length).equals(1)
+    expect(arr[0]).equals(126)
+  })
+
+
+  it(`getParts MAX_VALUE_ALLOWED: ${  FIRST_VALUE_UNSUPPORTED.toLocaleString('es-cl')}`, () => {
+    const num = FIRST_VALUE_UNSUPPORTED
+    const arr = converter.getParts(num)
+    expect(arr.length).equals(4)
+    expect(arr[0]).equals(990, 'cent')
+    expect(arr[1]).equals(999, 'thousands')
+    expect(arr[2]).equals(999999, 'millions')
+    expect(arr[3]).equals(9999, 'billions')
+  })
 })

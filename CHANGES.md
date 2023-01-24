@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.0.9
+
+* Updates documentation
+* Billions compatibility
+
+## 0.0.8
+
+* Enable automatic publishing using Github Actions
+
 ## 0.0.7
 
 * Re-enable coverage and set tests in targeting 100%
