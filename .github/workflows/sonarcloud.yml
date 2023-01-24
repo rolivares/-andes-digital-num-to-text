@@ -24,6 +24,7 @@ jobs:
         run: |
             npm i
             npm run test:coverage
+            ls -ls
             ls ./reports/coverage/*.info
 
       - name: SonarCloud Scan
