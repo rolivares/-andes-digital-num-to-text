@@ -24,10 +24,8 @@ export interface ITranslationText {
   readonly num: number
   readonly txt: string
   readonly fem?: string
-  /** mild-mannered */
-  readonly mm?: string
-  /** accent mark */
-  readonly txtAlt?: string
+  /** apocopate */
+  readonly ap?: string
 }
 
 export interface INumToTextConverter {

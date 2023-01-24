@@ -4,16 +4,16 @@ Simple process in order to translate numbers to texts using spanish rules on car
 
 * See more in <https://www.rae.es/dpd/cardinales>
 
-Process considers forms 'mild-mannered' (`apocopado`) and gender using options provided to translate method.
+Process considers forms 'apocopate' (`apocopado`) and gender using options provided to translate method.
 
 ## Restrictions
 
-Number to translate is using only integer part in order to translate.
+* Number to translate is using only integer part in order to translate.
+* Compatible for numbers between [0 ... 999.999.999.999] (1 billion - 1)
 
 ## Next versions
 
 * Simplify translate process
-* Spanish billions compatibility
 * Decimal parts
 * Automatic pluralization
 
