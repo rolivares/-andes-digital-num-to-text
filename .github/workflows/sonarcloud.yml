@@ -9,7 +9,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  sonarcloud:
+  sonar_cloud:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
@@ -18,8 +18,20 @@ jobs:
         with:
           node-version: 16
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: build tests
+        run: |
+            npm i
+            npm run test:coverage
+            ls -l ./reports/coverage
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: -Dsonar.javascript.lcov.reportPaths=./reports/coverage/lcov.info
