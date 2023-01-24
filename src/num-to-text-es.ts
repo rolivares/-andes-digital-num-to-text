@@ -1,5 +1,5 @@
 import { ICaseTransform } from './transforms/case-transform'
-import TRANSLATION_TEXTS, { BILLION } from './translation-texts'
+import TRANSLATION_TEXTS, { FIRST_VALUE_UNSUPPORTED, HUNDRED, THOUSAND } from './translation-texts'
 import { INumToTextConverter, INumToTextOptions, NumToTextCaseStyle, NumToTextGenderStyle } from './types'
 
 export default class EsNumToTextConverter implements INumToTextConverter {
@@ -10,35 +10,30 @@ export default class EsNumToTextConverter implements INumToTextConverter {
 
   translate(num: number, options?: INumToTextOptions): string {
 
-    if (num >= BILLION) throw new Error(`Not implemented for numbers greater than ${(BILLION - 1).toLocaleString('es-cl')}`)
-
     const opts = this.ensureOptions(options)
-    const casing = this.getCasing(opts)
-    const mmForm = !!options?.suffix
-    const chunks: string[] = []
-    const parts = this.getParts(num).reverse()
+    const hasSuffix = !!opts.suffix
 
+    if (num >= FIRST_VALUE_UNSUPPORTED)
+      throw new Error(`Not implemented for numbers greater than ${(FIRST_VALUE_UNSUPPORTED).toLocaleString('es-cl')}`)
+
+    const casing = this.getCasing(opts)
+    const chunks: string[] = []
+    const parts = this.getParts(num)
+    let ended = ''
     parts.forEach((part, index) => {
-      const singular = (part === 1)
-      switch (index) {
-        case 0:
-          if (part > 0 || (part === 0 && parts.length === 1))
-            chunks.push(this.reduceTranslation(part, mmForm, opts.gender))
-          break
-        case 1:
-          if (part > 0)
-            chunks.push(this.directTranslate(1000 ** index, mmForm, opts.gender))
-          if (part > 1) {
-            chunks.push(this.reduceTranslation(part, mmForm, opts.gender))
-          }
-          break
-        case 2:
-        default:
-          chunks.push(this.directTranslate(1000 ** index, singular, NumToTextGenderStyle.MASCULINE))
-          chunks.push(this.reduceTranslation(part, true, NumToTextGenderStyle.MASCULINE))
-          break
+      let useApocopate: boolean
+      if (part > 0 && index > 0) {
+        useApocopate = part === 1
+        ended = this.directTranslate(this.getDivisor(index - 1), useApocopate, opts.gender)
+        chunks.push(ended)
+      }
+      if ((part === 1 && index !== 1) || (part === 0 && parts.length === 1) || (part > 1 && parts.length >= 1)) {
+        useApocopate = hasSuffix || (part === 1 && index > 1) || index > 1
+        chunks.push(this.reduceTranslation(part, useApocopate, index === 0 ? opts.gender : NumToTextGenderStyle.MASCULINE))
       }
     })
+
+    // console.log('translate ===>', { num: num.toLocaleString('es-cl'), parts, chunks })
     chunks.reverse()
     const ret = `${chunks.map(c => c.trim()).join(' ')} ${this.getSuffix(num, opts)}`.trim()
     return casing.transform(ret)
@@ -61,37 +56,70 @@ export default class EsNumToTextConverter implements INumToTextConverter {
     return casing
   }
 
-  private getParts(num: number): number[] {
-    return num.toLocaleString('es-cl', { maximumFractionDigits: 0 }).split('.').map(chunk => parseInt(chunk, 10))
+  public getDivisor(index: number): number {
+    if (index === 0) return 1000
+    const rest = 10 ** (3 * (2 * index))
+    return rest
+  }
+
+  public getPortion(num: number, index: number): number {
+    if (index === 0) {
+      return num % this.getDivisor(0)
+    }
+    const expPrev = this.getDivisor(index - 1)
+    const expCurr = this.getDivisor(index)
+    const rest = (Math.round((num - (num % expPrev))) % expCurr) / expPrev
+    return rest
+  }
+
+  /**
+   * Returns an array with splitted portions of tokens ordered from units to higher values
+   * @param num
+   * @returns array of number with grouped values
+   */
+  public getParts(num: number): number[] {
+    const arr: number[] = []
+    let index = 0
+    do {
+      arr.push(this.getPortion(num, index))
+      index += 1
+    } while (num >= this.getDivisor(index - 1))
+
+    return arr
   }
 
   private reduceTranslation(num: number, mmForm: boolean, gender: NumToTextGenderStyle): string {
-    if (num >= 0 && num < 30) {
+    if (num >= 0 && num < 30) { // 11
       return this.directTranslate(num, mmForm, gender)
     }
-    if (num < 100) {
+    if (num < 100) { // 54, 40
       const units = num % 10
-      if (units === 0) {
+      if (units === 0) {  // 40
         return this.directTranslate(num, mmForm, gender)
       }
-      return `${this.directTranslate(num - units, mmForm, gender)} y ${this.reduceTranslation(units, mmForm, gender)}`
+      return `${this.directTranslate(num - units, mmForm, gender)} y ${this.reduceTranslation(units, mmForm, gender)}` // 54
+    } if (num <= 999) {
+      // 800, 564
+      const tens = num % 100
+      if (tens === 0)  // 800
+        return `${this.directTranslate(num, mmForm, gender)}`
+      const suffix = num - tens === HUNDRED ? 'to' : ''
+      return `${this.directTranslate(num - tens, mmForm, gender)}${suffix} ${this.reduceTranslation(tens, mmForm, gender)}`
     }
-    // by construction this method is called only on numbers less than 1000
-    const tens = num % 100
-    const hundreds = num - tens
-    if (tens === 0) {
-      return this.directTranslate(num, mmForm, gender)
-    }
-    if (num <= 199) {
-      return `ciento ${this.reduceTranslation(num - 100, mmForm, gender)} `
-    }
-    return `${this.directTranslate(hundreds, mmForm, gender)} ${this.reduceTranslation(tens, mmForm, gender)} `
+
+    const hundreds = this.getPortion(num, 0)
+    const thousands = this.getPortion(num, 1)
+
+    return [
+      this.reduceTranslation(thousands, mmForm, gender),
+      this.directTranslate(THOUSAND, mmForm, gender),
+      this.reduceTranslation(hundreds, mmForm, gender)].join(' ')
   }
 
-  private directTranslate(num: number, mmForm: boolean, genderStyle: NumToTextGenderStyle): string {
+  private directTranslate(num: number, apocopate: boolean, genderStyle: NumToTextGenderStyle): string {
     const text = this.texts.find(t => t.num === num)
     if (genderStyle === NumToTextGenderStyle.MASCULINE) {
-      return (mmForm ? (text.ap || text.txt) : text.txt)
+      return (apocopate ? (text.ap || text.txt) : text.txt)
     }
     return (text.fem || text.txt)
   }

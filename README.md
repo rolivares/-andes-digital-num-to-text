@@ -14,7 +14,6 @@ Process considers forms 'apocopate' (`apocopado`) and gender using options provi
 ## Next versions
 
 * Simplify translate process
-* Spanish billions compatibility
 * Decimal parts
 * Automatic pluralization
 

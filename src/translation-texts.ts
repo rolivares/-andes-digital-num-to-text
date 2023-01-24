@@ -1,9 +1,20 @@
 import { ITranslationText } from './types'
 
-export const HUNDRED = 100
-export const THOUSAND = 1000
-export const MILLION = 1000000
-export const BILLION = MILLION * MILLION
+/** 10^2 */
+export const HUNDRED = 10 ** 2
+/** 10^3 */
+export const THOUSAND = 10 ** 3
+/** 10^6 */
+export const MILLION = 10 ** 6
+/** 10^12 */
+export const BILLION = 10 ** 12
+/** 10^18 */
+export const TRILLION = 10 ** 18
+/** 10^24 */
+export const QUADRILLION = 10 ** 24
+
+export const FIRST_VALUE_UNSUPPORTED = 9999999999999990
+
 
 const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 0, txt: 'cero' },
@@ -55,9 +66,10 @@ const TRANSLATION_TEXTS: ITranslationText[] = [
   { num: 800, txt: 'ochocientos', fem: 'ochocientas' },
   { num: 900, txt: 'novecientos', fem: 'novecientas' },
 
-  { num: THOUSAND, txt: 'mil', ap: 'mil' },
+  { num: THOUSAND, txt: 'mil' },
   { num: MILLION, txt: 'millones', ap: 'millón' },
-  { num: BILLION, txt: 'billones', ap: 'billón' }
+  { num: BILLION, txt: 'billones', ap: 'billón' },
+  { num: TRILLION, txt: 'trillones', ap: 'trillón' }
 
 ]
 

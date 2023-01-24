@@ -26,8 +26,6 @@ export interface ITranslationText {
   readonly fem?: string
   /** apocopate */
   readonly ap?: string
-  /** accent mark */
-  readonly txtAlt?: string
 }
 
 export interface INumToTextConverter {

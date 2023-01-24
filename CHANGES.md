@@ -3,6 +3,7 @@
 ## 0.0.9
 
 * Updates documentation
+* Billions compatibility
 
 ## 0.0.8
 
