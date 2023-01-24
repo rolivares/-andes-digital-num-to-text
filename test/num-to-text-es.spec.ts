@@ -302,7 +302,7 @@ describe('EsNumToTextConverter', () => {
   })
 
 
-  it('getParts MAX_VALUE_ALLOWED: ' + FIRST_VALUE_UNSUPPORTED.toLocaleString('es-cl'), () => {
+  it(`getParts MAX_VALUE_ALLOWED: ${  FIRST_VALUE_UNSUPPORTED.toLocaleString('es-cl')}`, () => {
     const num = FIRST_VALUE_UNSUPPORTED
     const arr = converter.getParts(num)
     expect(arr.length).equals(4)
