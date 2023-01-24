@@ -22,7 +22,7 @@ jobs:
 
       - name: build tests
         run: |
-            npm run i
+            npm i
             npm run test:coverage
             ls ./reports/coverage/*.info
 
