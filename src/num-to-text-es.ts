@@ -1,6 +1,12 @@
 import { ICaseTransform } from './transforms/case-transform'
 import TRANSLATION_TEXTS, { FIRST_VALUE_UNSUPPORTED, HUNDRED, TENS, THOUSAND } from './translation-texts'
-import { INumToTextConverter, INumToTextOptions, NumToTextCaseStyle, NumToTextGenderStyle } from './types'
+import {
+  CASE_STYLE_TITLE,
+  GENDER_STYLE_MASCULINE,
+  INumToTextConverter,
+  INumToTextOptions,
+  NumToTextGenderStyle,
+} from './types'
 
 export default class EsNumToTextConverter implements INumToTextConverter {
 
@@ -27,7 +33,7 @@ export default class EsNumToTextConverter implements INumToTextConverter {
       }
       if (this.isNotThousandPart(part, index) || this.isZeroValue(part, parts) || this.isNotZeroPart(part, parts)) {
         useApocopate = hasSuffix || (part === 1 && index > 1) || index > 1
-        chunks.push(this.reduceTranslation(part, useApocopate, index === 0 ? opts.gender : NumToTextGenderStyle.MASCULINE))
+        chunks.push(this.reduceTranslation(part, useApocopate, index === 0 ? opts.gender : GENDER_STYLE_MASCULINE))
       }
     })
     chunks.reverse()
@@ -59,12 +65,12 @@ export default class EsNumToTextConverter implements INumToTextConverter {
   }
 
   private ensureOptions(options?: INumToTextOptions): INumToTextOptions {
-    return { gender: NumToTextGenderStyle.MASCULINE, case: NumToTextCaseStyle.TITLE_CASE, ...(options || {}) }
+    return { gender: GENDER_STYLE_MASCULINE, case: CASE_STYLE_TITLE, ...(options || {}) }
   }
 
   private getCasing(options: INumToTextOptions) {
     const casing = this.transforms.find(t => t.type === options.case)
-    if (!casing) return this.transforms.find(t => t.type === NumToTextCaseStyle.TITLE_CASE)
+    if (!casing) return this.transforms.find(t => t.type === CASE_STYLE_TITLE)
     return casing
   }
 
@@ -131,7 +137,7 @@ export default class EsNumToTextConverter implements INumToTextConverter {
 
   private directTranslate(num: number, apocopate: boolean, genderStyle: NumToTextGenderStyle): string {
     const text = this.texts.find(t => t.num === num)
-    if (genderStyle === NumToTextGenderStyle.MASCULINE) {
+    if (genderStyle === GENDER_STYLE_MASCULINE) {
       return (apocopate ? (text.ap || text.txt) : text.txt)
     }
     return (text.fem || text.txt)

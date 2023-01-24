@@ -1,15 +1,12 @@
 export type NumToTextGenderStyle = 'F' | 'M'
-export const NumToTextGenderStyle = {
-  FEMININE: 'F' as NumToTextGenderStyle,
-  MASCULINE: 'M' as NumToTextGenderStyle
-}
+export const GENDER_STYLE_MASCULINE: NumToTextGenderStyle = 'M'
+export const GENDER_STYLE_FEMININE: NumToTextGenderStyle = 'F'
 
 export type NumToTextCaseStyle = 'UPPER_CASE' | 'LOWER_CASE' | 'TITLE_CASE'
-export const NumToTextCaseStyle = {
-  UPPER_CASE: 'UPPER_CASE' as NumToTextCaseStyle,
-  LOWER_CASE: 'LOWER_CASE' as NumToTextCaseStyle,
-  TITLE_CASE: 'TITLE_CASE' as NumToTextCaseStyle
-}
+export const CASE_STYLE_UPPER: NumToTextCaseStyle = 'UPPER_CASE'
+export const CASE_STYLE_LOWER: NumToTextCaseStyle = 'LOWER_CASE'
+export const CASE_STYLE_TITLE: NumToTextCaseStyle = 'TITLE_CASE'
+
 
 export interface INumToTextOptions {
   gender?: NumToTextGenderStyle,
