@@ -1,12 +1,12 @@
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
-import { NumToTextCaseStyle, NumToTextGenderStyle } from 'src'
 import EsNumToTextConverter from 'src/num-to-text-es'
 import { ICaseTransform } from 'src/transforms/case-transform'
 import LowerCaseTransform from 'src/transforms/lower-case-transform'
 import TitleCaseTransform from 'src/transforms/title-case-transform'
 import UpperCaseTransform from 'src/transforms/upper-case-transform'
 import { BILLION, FIRST_VALUE_UNSUPPORTED, HUNDRED, MILLION, QUADRILLION, THOUSAND, TRILLION } from 'src/translation-texts'
+import { NumToTextCaseStyle, NumToTextGenderStyle } from 'src/types'
 
 describe('EsNumToTextConverter', () => {
   const transforms: ICaseTransform[] = [

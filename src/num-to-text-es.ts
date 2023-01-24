@@ -19,21 +19,17 @@ export default class EsNumToTextConverter implements INumToTextConverter {
     const casing = this.getCasing(opts)
     const chunks: string[] = []
     const parts = this.getParts(num)
-    let ended = ''
     parts.forEach((part, index) => {
       let useApocopate: boolean
       if (this.mustAddSeparator(part, index)) {
         useApocopate = part === 1
-        ended = this.directTranslate(this.getPartsDivisor(index - 1), useApocopate, opts.gender)
-        chunks.push(ended)
+        chunks.push(this.directTranslate(this.getPartsDivisor(index - 1), useApocopate, opts.gender))
       }
       if (this.isNotThousandPart(part, index) || this.isZeroValue(part, parts) || this.isNotZeroPart(part, parts)) {
         useApocopate = hasSuffix || (part === 1 && index > 1) || index > 1
         chunks.push(this.reduceTranslation(part, useApocopate, index === 0 ? opts.gender : NumToTextGenderStyle.MASCULINE))
       }
     })
-
-    // console.log('translate ===>', { num: num.toLocaleString('es-cl'), parts, chunks })
     chunks.reverse()
     const ret = `${chunks.map(c => c.trim()).join(' ')} ${this.getSuffix(num, opts)}`.trim()
     return casing.transform(ret)
