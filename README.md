@@ -1,6 +1,8 @@
 # Description
 
 [![npm version](https://badge.fury.io/js/numero-a-texto.svg)](https://badge.fury.io/js/numero-a-texto)
+![release](https://img.shields.io/github/release-date/rolivares/numero-a-texto-es-js)
+![downloads](https://img.shields.io/npm/dw/numero-a-texto)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=rolivares_num-to-text-es-js&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=rolivares_num-to-text-es-js)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=rolivares_num-to-text-es-js&metric=coverage)](https://sonarcloud.io/summary/new_code?id=rolivares_num-to-text-es-js)
 
