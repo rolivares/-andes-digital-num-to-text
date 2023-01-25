@@ -25,7 +25,6 @@ jobs:
         run: |
             npm i
             npm run test:coverage
-            ls -l ./reports/coverage
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
