@@ -5,6 +5,7 @@
 ![downloads](https://img.shields.io/npm/dw/numero-a-texto)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=rolivares_num-to-text-es-js&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=rolivares_num-to-text-es-js)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=rolivares_num-to-text-es-js&metric=coverage)](https://sonarcloud.io/summary/new_code?id=rolivares_num-to-text-es-js)
+![snyk](https://snyk.io/test/github/rolivares/numero-a-texto/badge.svg)
 
 Simple process in order to translate numbers to texts using spanish rules on cardinal numbering.
 
