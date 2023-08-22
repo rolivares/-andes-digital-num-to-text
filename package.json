@@ -29,7 +29,6 @@
     "test": "mocha --config .mocharc.json --reporter mocha-multi-reporters",
     "test:watch": "mocha --watch --watch-files src,test --reporter mocha-multi-reporters",
     "test:coverage": "nyc mocha --config .mocharc.json",
-    "test:coverage:dark": "npm run test:coverage && cp ./node_modules/nyc-dark/*.css reports/coverage/",
     "test:sonar": "sonar-scanner -D sonar.projectKey=${npm_package_name} -D sonar.projectVersion=${npm_package_version}",
     "update": "updates --update --minor && npm install",
     "clean": "rimraf ./dist",
