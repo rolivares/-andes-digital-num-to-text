@@ -30,10 +30,11 @@ Process considers forms 'apocopate' (`apocopado`) and gender using options provi
 npm install --save numero-a-texto
 ```
 
-## Uso
+## Use
 
 ```js
-const numToText = require('numero-a-texto')
+# default translator
+const { numToText } = require('numero-a-texto')
 
 numToText.translate(154821)
 # Numeric form
